@@ -1,0 +1,19 @@
+@startuml CD
+
+[Client App]
+[Car Inventory] << Service >>
+[VIN Decoder] << Service >>
+() "car-info" as decode1
+
+[Client App] -( cars
+cars - [Car Inventory]
+[Car Inventory] -( decode1
+decode1 - [VIN Decoder]
+
+database Cars << repository >>
+[Car Inventory] -down- Cars
+
+database "Domestic VINs" << repository >>
+[VIN Decoder] -down- [Domestic VINs]
+
+@enduml

@@ -1,0 +1,20 @@
+# compose.yaml
+services:
+  # Service for running the SQLite countries application
+  countries_sqlite:
+    # Use the specified Docker image
+    image: niccap/countries_sqlite
+    # Mount the 'mydata' volume to the '/usr/src/app/data' directory inside the container
+    volumes:
+      - mydata:/usr/src/app/data
+    # Expose port 8080 on the host and map it to port 8080 inside the container
+    ports:
+      - "8080:8080"
+# Define the 'mydata' volume to persist data
+volumes:
+  mydata:
+
+# docker compose up
+
+
+

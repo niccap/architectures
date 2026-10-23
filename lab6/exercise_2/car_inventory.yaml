@@ -1,0 +1,35 @@
+# car_inventory.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-inventory-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: car-inventory # assign to the deployment all pods with this label
+
+  template: # pod configuration
+    metadata:
+      labels: # label for identifying the pod
+        app: car-inventory
+    spec:
+      containers: # pod containers
+      - name: car-inventory
+        image: niccap/car_inventory:latest # image on the docker hub
+        ports:
+        - containerPort: 8080 # car-inventory port
+--- 
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: car-inventory-service 
+spec:
+  type: LoadBalancer # external service
+  selector:
+    app: car-inventory # forward requests to pods with this label
+  ports:
+    - protocol: TCP
+      port: 8080 # external port (within the cluster)
+      targetPort: 8080 # internal port
+

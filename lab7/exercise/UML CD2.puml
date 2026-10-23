@@ -1,0 +1,22 @@
+@startuml CD
+
+[Client App]
+[Car Inventory] << Service >>
+[VIN Decoder] << Service >>
+queue "car-info-request"
+queue "car-info-reply"
+
+[Client App] -( cars
+cars - [Car Inventory]
+[Car Inventory] -> "car-info-request"
+"car-info-request" -> [VIN Decoder]
+[VIN Decoder] -d-> "car-info-reply"
+"car-info-reply" -l-> [Car Inventory]
+
+database Cars << repository >>
+[Car Inventory] -down- Cars
+
+database "Domestic VINs" << repository >>
+[VIN Decoder] -down- [Domestic VINs]
+
+@enduml

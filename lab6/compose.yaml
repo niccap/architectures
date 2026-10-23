@@ -1,0 +1,11 @@
+services:
+  car_inventory:
+    image: niccap/car_inventory
+    ports:
+      - "8080:8080"
+  vin_decoder:
+    image: niccap/vin_decoder
+    ports:
+      - "8081:8081"
+
+

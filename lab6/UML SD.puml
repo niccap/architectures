@@ -1,0 +1,34 @@
+@startuml SD
+
+hide footbox
+participant "Client App"
+participant "Car Inventory" <<Service>>
+participant "VIN Decoder" <<Service>>
+participant "Foreign VIN Decoder" <<Service>>
+
+activate "Client App"
+    "Client App" -> "Car Inventory": POST /cars {vin: string}
+    activate "Car Inventory"
+        "Car Inventory" -> "VIN Decoder": GET /car-info {vin: string}  
+        activate "VIN Decoder"
+            "VIN Decoder" -> "VIN Decoder": [search for vin]
+            activate "VIN Decoder"
+            deactivate "VIN Decoder"
+            opt vin not found
+                "VIN Decoder" -> "Foreign VIN Decoder": GET /car-info {vin: string} 
+                activate "Foreign VIN Decoder"
+                    "Foreign VIN Decoder" -> "Foreign VIN Decoder": [search for vin]
+                    activate "Foreign VIN Decoder"
+                    deactivate "Foreign VIN Decoder"
+                    "Foreign VIN Decoder" -> "VIN Decoder": {car info}
+                deactivate "Foreign VIN Decoder"
+            end
+            "VIN Decoder" --> "Car Inventory": {car info}
+        deactivate "VIN Decoder"
+        "Car Inventory" -> "Car Inventory": [store car info]
+        activate "Car Inventory"
+        deactivate "Car Inventory"
+        "Client App" <-- "Car Inventory": {vin: int, car info}
+    deactivate "Car Inventory"
+deactivate "Client App"
+@enduml

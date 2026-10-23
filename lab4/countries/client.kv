@@ -1,0 +1,54 @@
+MDBoxLayout:
+    orientation: 'vertical'
+    padding: '16dp'
+    spacing: '16dp'
+    md_bg_color: app.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        size_hint_y: None
+        height: '40dp'
+        MDLabel:
+            text: 'Countries'
+            font_style: 'Title'
+        MDButton:
+            on_press: app.get_countries()
+            MDButtonText:
+                text: 'Get Countries'
+
+    MDCard:
+        size_hint_y: None
+        height: '224dp'
+        padding: '12dp'
+        MDScrollView:
+            do_scroll_x: False
+            MDLabel:
+                id: result_text
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+
+    MDLabel:
+        id: status_text
+        adaptive_height: True
+
+    MDTextField:
+        id: name_input
+        MDTextFieldHintText:
+            text: 'Name'
+
+    MDTextField:
+        id: capital_input
+        MDTextFieldHintText:
+            text: 'Capital'
+
+    MDTextField:
+        id: area_input
+        MDTextFieldHintText:
+            text: 'Area'
+
+    MDButton:
+        style: 'filled'
+        on_press: app.add_country()
+        MDButtonText:
+            text: 'Add Country'
+

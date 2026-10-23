@@ -1,0 +1,78 @@
+<!--
+LAB 4 - EXERCISE 2
+Create a client for the countries Web service with a technology of your choice
+Start the Web Service in HTTP mode (the browser will block HTTPS requests with unsigned certificates)
+-->
+
+<!DOCTYPE html>
+
+<head>
+    <title>Countries Web Client</title>
+</head>
+
+<body>
+    <h1>Countries Information</h1>
+
+    <!-- Form to add a new country -->
+    <form id="addCountryForm">
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" required>
+        <label for="capitalInput">Capital:</label>
+        <input type="text" id="capitalInput" required>
+        <label for="areaInput">Area (square km):</label>
+        <input type="number" id="areaInput" required>
+    </form>
+    <br>
+
+    <button type="button" onclick="addCountry()">Add Country</button>
+    <button onclick="getCountries()">Get Countries</button>
+    <div id="result"></div>
+
+    <script>
+        const BaseURL = "http://127.0.0.1:8080";
+
+        // for testing only... this must be avoided in production environments
+        const API_Key = "2RQs4LkXj6eQ73c?-YKtPYXg5ce0ERvmVIg4IUMc1q2?DAH/R1IZkxv7sWHNawWb";
+
+        function getCountries() {
+            fetch(BaseURL + "/countries", { method: 'GET', headers: { 'API-Key': API_Key }})
+                .then(response => response.json())
+                .then(data => displayCountries(data))
+                .catch(error => {
+                    alert('Failed to fetch country information.');
+                });
+        }
+
+        function addCountry() {
+            fetch(BaseURL + "/countries", {
+                method: 'POST',
+                headers: { 'API-Key': API_Key, 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: document.getElementById('nameInput').value,
+                    capital: document.getElementById('capitalInput').value,
+                    area: document.getElementById('areaInput').value,
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(`New country added: ${data.name}`);
+                    getCountries(); // Refresh the list of countries after adding a new one
+                })
+                .catch(error => {
+                    alert('Failed to add a new country.');
+                });
+        }
+        function displayCountries(countries) {
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h2>List of Countries</h2>';
+            resultDiv.innerHTML += '<ul>';
+            countries.forEach(country => {
+                resultDiv.innerHTML += `<li>${country.name} (capital: ${country.capital}, area: ${country.area})</li>`;
+            });
+            resultDiv.innerHTML += '</ul>';
+        }
+
+    </script>
+</body>
+
+</html>

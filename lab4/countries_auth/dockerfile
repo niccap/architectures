@@ -1,0 +1,18 @@
+# Use the lightweight alpine image
+FROM python:3.8-alpine
+
+# Installing needed packages
+RUN pip install flask hypercorn
+
+# Defining the working directory
+WORKDIR /usr/src/app
+
+# Adding needed files
+COPY countries_auth.py cert.pem key.pem ./
+
+# Exposing the port used to communicate
+EXPOSE 443
+
+# Command to run when executed
+CMD ["hypercorn", "countries_auth:app", "--bind", ":443", "--certfile=cert.pem", "--keyfile=key.pem"]
+

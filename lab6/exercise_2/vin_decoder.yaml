@@ -1,0 +1,35 @@
+# vin_decoder.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vin-decoder-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vin-decoder # assign to the deployment all pods with this label
+
+  template: # pod configuration
+    metadata:
+      labels: # label for identifying the pod
+        app: vin-decoder
+    spec:
+      containers: # pod containers
+      - name: vin-decoder
+        image: niccap/vin_decoder:latest # image on the docker hub
+        ports:
+        - containerPort: 8081 # car-inventory port
+--- 
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: vin-decoder-service 
+spec:
+  selector:
+    app: vin-decoder # forward requests to pods with this label
+  ports:
+    - protocol: TCP
+      port: 8081 # external port (within the cluster)
+      targetPort: 8081 # internal port
+
+
