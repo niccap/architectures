@@ -1,0 +1,17 @@
+services:
+  game_2048:
+    image: cnrock/2048
+    ports:
+      - "8080:80"
+  jupyter:
+    image: jupyter/base-notebook
+    ports:
+      - "8081:8888"
+    environment:
+      JUPYTER_TOKEN: "password"
+  mario:
+    image: doron/mario
+    ports:
+      - "8082:8080"
+
+      

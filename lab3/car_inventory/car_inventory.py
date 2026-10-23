@@ -1,4 +1,4 @@
-# LAB 3 - EXERCISE 1
+# LAB 3 - EXERCISE
 # Containerize with Docker, deploy on Azure and test with Postman the Web Service 
 # for car inventory management made in the previous lesson
 

@@ -1,0 +1,17 @@
+# compose.yaml
+services:
+  my_webapp:
+    build: .
+    ports:
+      - "8080:80"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /usr/local/apache2/htdocs/
+
+
+          
+
+
+  

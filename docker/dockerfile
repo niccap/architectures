@@ -1,0 +1,6 @@
+# Use the latest version of the official Apache HTTP Server image 
+# as the base image
+FROM httpd:latest
+
+# Copy the local 'index.html' file to the container's document root
+COPY index.html /usr/local/apache2/htdocs/

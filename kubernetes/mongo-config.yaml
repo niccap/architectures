@@ -1,0 +1,9 @@
+# mongo-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config # an arbitrary name
+data: # the actual contents (key-value pairs)
+  mongo-url: mongo-service # the service connected with the mongo-db pod
+
+

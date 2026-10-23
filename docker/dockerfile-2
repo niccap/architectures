@@ -1,0 +1,31 @@
+# Use a specific base image
+FROM python:3.9-slim
+
+# Set the author label
+LABEL maintainer="Your Name <youremail@example.com>"
+
+# Set the environment
+ENV PYTHONUNBUFFERED 1
+
+# Set the working directory
+WORKDIR /app
+
+# Copy source code files into the working directory
+COPY . /app
+
+# Install project dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run system updates and install additional packages
+RUN apt-get update 
+RUN apt-get install -y package1 package2
+RUN rm -rf /var/lib/apt/lists/*
+
+# Expose the service port
+EXPOSE 8000
+
+# Run the default command to start the service
+
+CMD ["python", "app.py"]
+
+

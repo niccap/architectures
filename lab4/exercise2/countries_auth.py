@@ -1,15 +1,12 @@
-# LAB 4 - EXERCISE 1
+# LAB 4 - EXERCISE 2
 # Improve the country Web service to enforce:
 # - API-key authentication
 # - HTTPS-based secure connection
 # - CORS support
-# Containerize your Web service and deploy it on Azure
-
-# countries_auth.py
-
+#
 # To start the HTTP server:
 # hypercorn countries_auth:app --bind :8080
-
+#
 # To start the HTTPS server:
 # hypercorn countries_auth:app --bind :443 --certfile=cert.pem --keyfile=key.pem 
 

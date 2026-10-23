@@ -1,9 +1,12 @@
+# LAB 4 - EXERCISE
+# Modify the client to support HTTP Basic Authentication
+
 from kivymd.app import MDApp
 from kivy.core.window import Window
 import requests
 
-BaseURL = "https://localhost"
-API_Key = "2RQs4LkXj6eQ73c?-YKtPYXg5ce0ERvmVIg4IUMc1q2?DAH/R1IZkxv7sWHNawWb"
+BaseURL = "http://localhost:8080"
+API_Key = "Basic dXNlcjE6cGFzc3dvcmQxMjM="
 
 class Client(MDApp):
     def build(self):
@@ -12,7 +15,7 @@ class Client(MDApp):
 
     def get_countries(self):
         try:
-            response = requests.get(BaseURL + "/countries", headers = {'API-Key': API_Key}, verify = False)
+            response = requests.get(BaseURL + "/countries", headers = {'Authorization': API_Key})
             if response.status_code == 200:
                 text = ""
                 for country in response.json():
@@ -32,7 +35,7 @@ class Client(MDApp):
         if name and capital and area:
             data = {"name": name, "capital": capital, "area": area}
             try:
-                response = requests.post(BaseURL + "/countries", json = data, headers = {'API-Key': API_Key}, verify = False)
+                response = requests.post(BaseURL + "/countries", json = data, headers = {'Authorization': API_Key})
                 if response.status_code == 201:
                     self.get_countries()
                     self.root.ids.status_text.text = "Country added successfully."

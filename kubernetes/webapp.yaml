@@ -1,0 +1,54 @@
+# webapp.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp # assign to the deployment all pods with this label
+
+  template: # pod configuration
+    metadata:
+      labels: # label for identifying the pod
+        app: webapp
+    spec:
+      containers: # pod containers
+      - name: webapp
+        image: nanajanashia/k8s-demo-app:v1.0 # image on the docker hub
+        ports:
+        - containerPort: 3000 # the port where the Web app listens
+        env:
+        - name: USER_NAME 
+          valueFrom:
+            secretKeyRef: # value from the secret
+              name: mongo-secret 
+              key: mongo-user
+        - name: USER_PWD 
+          valueFrom:
+            secretKeyRef: # value from the secret
+              name: mongo-secret 
+              key: mongo-password
+        - name: DB_URL 
+          valueFrom: # value from the config map
+            configMapKeyRef:
+              name: mongo-config
+              key: mongo-url
+
+--- # configuration separator
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: webapp-service 
+spec:
+  type: LoadBalancer # external service
+  selector:
+    app: webapp # forward requests to pods with this label
+  ports:
+    - protocol: TCP
+      port: 8080 # external port on localhost with Docker Desktop
+      targetPort: 3000 # internal port
+
+      
+

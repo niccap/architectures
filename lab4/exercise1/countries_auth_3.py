@@ -1,4 +1,6 @@
-# countries.py
+# LAB 4 - EXERCISE
+# Modify the server to support HTTP Basic Authentication
+
 from flask import Flask, request, jsonify
 from waitress import serve
 from flask_httpauth import HTTPBasicAuth

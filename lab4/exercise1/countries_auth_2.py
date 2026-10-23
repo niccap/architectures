@@ -1,4 +1,6 @@
-# countries.py
+# LAB 4 - EXERCISE
+# Modify the server to support API-key authentication with flask-httpauth library 
+
 from flask import Flask, request, jsonify
 from waitress import serve
 from flask_httpauth import HTTPTokenAuth
