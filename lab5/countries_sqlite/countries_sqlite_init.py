@@ -1,4 +1,5 @@
 # countries_sqlite_init.py
+
 import sqlite3, os
 
 query = """

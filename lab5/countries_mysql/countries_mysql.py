@@ -1,5 +1,4 @@
-#countries_mysql.py
-# LAB 5 - EXERCISE 1
+# LAB 5 - EXERCISE
 # Modify the countries the Web Service to use the containerized DB
 # Extend the API with the following endpoints:
 #
