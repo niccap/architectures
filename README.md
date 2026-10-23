@@ -8,6 +8,8 @@ Il materiale accompagna le attività di laboratorio e illustra la realizzazione 
 
 | Cartella | Contenuti |
 | --- | --- |
+| [`docker/`](docker/) | Esempi introduttivi di Dockerfile, Docker Compose e Compose Watch. |
+| [`kubernetes/`](kubernetes/) | Manifest di esempio per applicazioni e MongoDB, con Deployment, Service, ConfigMap, Secret e configurazione della dashboard. |
 | [`lab1/`](lab1/) | Notebook Jupyter ed esempi di utilizzo di API HTTP con Python, incluse richieste a servizi di previsioni meteorologiche. |
 | [`lab2/`](lab2/) | Introduzione ai servizi REST con Flask e Waitress: Hello World, gestione di paesi e inventario di automobili. |
 | [`lab3/`](lab3/) | Containerizzazione dei servizi REST con Docker. |
@@ -15,8 +17,6 @@ Il materiale accompagna le attività di laboratorio e illustra la realizzazione 
 | [`lab5/`](lab5/) | Persistenza dei dati con SQLite e MySQL, script di inizializzazione e configurazioni Docker Compose. |
 | [`lab6/`](lab6/) | Composizione di servizi per la gestione di un inventario di automobili e la decodifica dei VIN, diagrammi UML ed esempi di deployment con Docker Compose e Kubernetes. |
 | [`lab7/`](lab7/) | Comunicazione asincrona con RabbitMQ: produttori e consumatori, code di lavoro, publish/subscribe e routing. |
-| [`docker/`](docker/) | Esempi introduttivi di Dockerfile, Docker Compose e Compose Watch. |
-| [`kubernetes/`](kubernetes/) | Manifest di esempio per applicazioni e MongoDB, con Deployment, Service, ConfigMap, Secret e configurazione della dashboard. |
 
 ## Tecnologie utilizzate
 
