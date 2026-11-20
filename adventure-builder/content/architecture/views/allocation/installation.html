@@ -1,0 +1,204 @@
+<h2 id="InstallView-primaryPrimaryPresentation">
+ <span id="InstallView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/implementationviewdeploy-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: implementationviewdeploy pp" decoding="async" loading="lazy" src="../../../assets/diagrams/implementationviewdeploy-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/implementationviewdeploy.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<p>
+ Notes:
+</p>
+<ul>
+ <li>
+  In this diagram, unnamed packages are used just to simplify representation of multiple &lt;&lt;manifest&gt;&gt; dependencies.
+ </li>
+ <li>
+  Only the most important artifacts are shown. We use '...' to indicate where there are other artifacts not in the diagram (the comment box indicates what artifacts are those).
+ </li>
+</ul>
+<h2 id="InstallView-elementElementCatalog">
+ <span id="InstallView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="InstallView-consumerwebsite.ear">
+ consumerwebsite.ear
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="InstallView-application.xml">
+ application.xml
+</h3>
+<p>
+ Standard Java EE deployment descriptor for ear files. Each ear has its own application.xml file with corresponding deployment configuration values.
+</p>
+<h3 id="InstallView-consumerwebsite-ejb.jar">
+ consumerwebsite-ejb.jar
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="InstallView-OrderFacade,CatalogFacade,UserMgmtFacade">
+ OrderFacade, CatalogFacade, UserMgmtFacade
+</h3>
+<p>
+ See
+ <a href="../runtime/consumer-website.html" title="wikilink">
+  Consumer Website Multi-tier View
+ </a>
+</p>
+<h3 id="InstallView-adventure.war">
+ adventure.war
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="InstallView-servicelocator.jar">
+ servicelocator.jar
+</h3>
+<p>
+ Library of utilities that implement the Service Locator pattern.
+</p>
+<h3 id="InstallView-waf-web.jar">
+ waf-web.jar
+</h3>
+<p>
+ Library that contains the Web Application Framework. It corresponds to package waf in the
+ <a href="../modules/top-level-uses.html" title="wikilink">
+  Top Level Module Uses View
+ </a>
+ .
+</p>
+<h3 id="InstallView-web.xml">
+ web.xml
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="InstallView-SignOnFilter,sign-on-config.xml,MainServlet,mappings.xml,TemplateServlet,screendefinitions.xml,index.jsp,SignOnNotifier,">
+ SignOnFilter, sign-on-config.xml, MainServlet, mappings.xml, TemplateServlet, screendefinitions.xml, index.jsp, SignOnNotifier,
+</h3>
+<p>
+ See
+ <a href="../runtime/consumer-website.html" title="wikilink">
+  Consumer Website Multi-tier View
+ </a>
+</p>
+<h3 id="InstallView-opc.ear">
+ opc.ear
+</h3>
+<p>
+ The enterprise archive that represents the OPC application. It is deployable on any Java EE compliant application server.
+</p>
+<h3 id="InstallView-opc-ejb.jar">
+ opc-ejb.jar
+</h3>
+<p>
+ Standard EJB jar file that contains all EJBs that comprise the OPC application, except for ProcessManagerBean and ManagerBean.
+</p>
+<h3 id="InstallView-PoEndPointBean,OtEndPointBean,WorkFlowManagerBean,PurchaseOrderBean,ActivityBean,TransportationBean,LodgingBean,CreditCardBean,OrderFillerBean,BrokerRequestorBean,BrokerServiceBean,CRMBean">
+ PoEndPointBean, OtEndPointBean, WorkFlowManagerBean, PurchaseOrderBean, ActivityBean, TransportationBean, LodgingBean, CreditCardBean, OrderFillerBean, BrokerRequestorBean, BrokerServiceBean, CRMBean
+</h3>
+<p>
+ See
+ <a href="../runtime/opc.html" title="wikilink">
+  OPC C&amp;C View
+ </a>
+</p>
+<h3 id="InstallView-OpcPurchaseOrderService.wsdl,WebServiceBroker.wsdl,OpcOrderTrackingService.wsdl">
+ OpcPurchaseOrderService.wsdl, WebServiceBroker.wsdl, OpcOrderTrackingService.wsdl
+</h3>
+<p>
+ These wsdl files contain the interface specifications for the SOAP web services that the OPC application
+ <em>
+  provides
+ </em>
+ . These web services are implemented and provided by components internal to the OPC application. These interfaces can be seen in the
+ <a href="../runtime/opc.html" title="wikilink">
+  OPC C&amp;C View
+ </a>
+ .
+</p>
+<h3 id="InstallView-LodgingPurchaseOrderService.wsdl,ActivityPurchaseOrderService.wsdl,CreditCardService.wsdl,AirlinePurchaseOrderService.wsdl,">
+ LodgingPurchaseOrderService.wsdl, ActivityPurchaseOrderService.wsdl, CreditCardService.wsdl, AirlinePurchaseOrderService.wsdl,
+</h3>
+<p>
+ These wsdl files contain the interface specifications for the SOAP web services that the OPC application
+ <em>
+  requires
+ </em>
+ . These web services are implemented and provided by external partners. These interfaces can be found in the
+ <a href="../runtime/opc.html" title="wikilink">
+  OPC C&amp;C View
+ </a>
+ .
+</p>
+<h3 id="InstallView-processmanager-ejb.jar">
+ processmanager-ejb.jar
+</h3>
+<p>
+ Standard EJB jar file that contains ProcessManagerBean and ManagerBean.
+</p>
+<h3 id="InstallView-ProcessManagerBean,ManagerBean">
+ ProcessManagerBean, ManagerBean
+</h3>
+<p>
+ See
+ <a href="../runtime/opc.html" title="wikilink">
+  OPC C&amp;C View
+ </a>
+</p>
+<h2 id="InstallView-contextContextDiagram">
+ <span id="InstallView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ <em>
+  TODO: Add here a context diagram that graphically shows the scope of the part of the system represented by this view. A context diagram typically shows the part of the system as a single, distinguished box in the middle surrounded by other boxes that are the external entities. Lines show the relations between the part of the system and the external entities.
+ </em>
+</p>
+<h2 id="InstallView-variabilityVariabilityGuide">
+ <span id="InstallView-variability">
+ </span>
+ Variability Guide
+</h2>
+<p>
+ <em>
+  TODO: Describe here any variability mechanisms used in the portion of the system shown in this view, along with how and when (build time, deploy time, run time) those mechanisms may be exercised. Examples of variability include: optional components (e.g., plug-ins, add-ons); configurable replication of components and connectors; selection among different implementations of an element or different vendors; parameterized values set in build flags, .properties files, .ini files, or other config files.
+ </em>
+</p>
+<h2 id="InstallView-rationaleRationale">
+ <span id="InstallView-rationale">
+ </span>
+ Rationale
+</h2>
+<p>
+ The entire Adventure Builder system is deployed as two ear files (consumerwebsite.ear and opc.ear). Having two separate ear files allows to deploy the two corresponding applications on different application server instances and different machines. These separate target runtime environments can then be configured according with the processing and communication needs of each application. TODO: why ProcessManagerBean and ManagerBean are deployed in a separate EJB jar file (processmanager-ejb.jar)
+</p>
+<p>
+ <em>
+  TODO: Describe here the rationale for any significant design decisions whose scope is limited to this view. Also describe any significant rejected alternatives. This section may also indicate assumptions, constraints, results of analysis and experiments, and architecturally significant requirements that affect the view.
+ </em>
+</p>
+<h2 id="InstallView-relatedRelatedViews">
+ <span id="InstallView-related">
+ </span>
+ Related Views
+</h2>
+<p>
+ N/A
+</p>

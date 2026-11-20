@@ -1,0 +1,199 @@
+<ul>
+ <li>
+  The system used as an example in this architecture document is an adapted version of the
+  <a href="https://blueprints.dev.java.net/adventurebuilder/">
+   Adventure Builder Reference application
+  </a>
+  , which was developed in the context of the Java BluePrints program at Sun Microsystems. However, the architecture documented here does not reflect exactly the implementation provided by Sun.
+  <ul>
+   <li>
+    To make it a more interesting and realistic example of an SOA solution, we made several assumptions about the business context and requirements of the system.
+   </li>
+   <li>
+    We have also added a few elements and relations that don't exist in Sun's implementation, and omitted others.
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  Always remember that the purpose of this software architecture document
+  <strong>
+   IS
+  </strong>
+  to:
+  <ul>
+   <li>
+    Provide a good example of how to organize your architecture documentation.
+   </li>
+   <li>
+    Show what kinds of information (multiple views, interfaces, behavior, rationale) should be recorded when documenting a software architecture.
+   </li>
+   <li>
+    Show examples of different notations that can be used for different views.
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  Remember that the purpose of this software architecture document
+  <strong>
+   IS NOT
+  </strong>
+  to:
+  <ul>
+   <li>
+    Provide an accurate design description of Sun's Adventure Builder system.
+   </li>
+   <li>
+    Show the best design alternative for each design decision in scope.
+   </li>
+   <li>
+    Provide guidelines for designing or implementing multi-tier, SOA, or Java EE systems.
+   </li>
+   <li>
+    Show
+    <em>
+     all
+    </em>
+    possible architecture views.
+   </li>
+   <li>
+    Show
+    <em>
+     all
+    </em>
+    possible alternative notations for a given piece of the document.
+   </li>
+   <li>
+    Show the best possible organization for a software architecture document. (You should compare the template provided here with your needs and adapt and evolve accordingly.)
+   </li>
+   <li>
+    Teach UML.
+   </li>
+   <li>
+    Teach Java EE.
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  This wiki is a companion to
+  <em>
+   <a href="https://resources.sei.cmu.edu/library/asset-view.cfm?assetid=30386">
+    Documenting Software Architectures: Views and Beyond, 2nd Edition
+   </a>
+  </em>
+  , Addison-Wesley, 2010. The book is sometimes referred to as the "DSA book" in the wiki.
+ </li>
+</ul>
+<ul>
+ <li>
+  Places where the documentation is not complete are marked with "TODO" or "TODO: &lt;description of what's missing&gt;". There are three reasons we left these TODOs in the document:
+  <ul>
+   <li>
+    Real software architecture documents have TODOs. In practice, these documents are never complete. They should be updated as the system evolves.
+    <small>
+     (The
+     <em>
+      good
+     </em>
+     reason.)
+    </small>
+   </li>
+   <li>
+    Completing that section would be too time consuming or take too much space, and would not add much to the goals of this exemplar architecture document.
+    <small>
+     (The
+     <em>
+      bad
+     </em>
+     reason.)
+    </small>
+   </li>
+   <li>
+    The TODOs also provide exercises for readers who want to practice architecture documentation in their own copy.
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  Likewise, some places in the documentation have 'TBD' (to be defined) to indicate that a design decision still has to be made.
+ </li>
+</ul>
+<ul>
+ <li>
+  If a section is marked as "N/A", it means the contents of that particular section are deemed not applicable or not necessary.
+ </li>
+</ul>
+<ul>
+ <li>
+  In a couple of views we created two versions of the primary presentation diagram, one in UML and the other using informal notation. In a real architecture document, you would almost never spend time doing that. The goal here was to generate discussion of what notation works better for different stakeholders.
+ </li>
+</ul>
+<ul>
+ <li>
+  Any diagram shows one (of many) possible depiction of the design.
+ </li>
+</ul>
+<ul>
+ <li>
+  Each view has a context diagram subsection. The purpose of the context diagram is to show what is in scope and what is external to the system (or the part of the system shown in that view). Instead of a diagram, this subsection may contain:
+  <ul>
+   <li>
+    a pointer to a context diagram in another view in case two views share the same context
+   </li>
+   <li>
+    "N/A" in case:
+    <ul>
+     <li>
+      a context diagram is deemed unnecessary for that view (
+      <a href="../views/modules/opc-decomposition.html" title="wikilink">
+       example
+      </a>
+      )
+     </li>
+     <li>
+      the primary presentation already explicitly identifies the external elements via a color coding (
+      <a href="../views/modules/top-level-uses.html" title="wikilink">
+       example
+      </a>
+      )
+     </li>
+     <li>
+      the primary presentation explicitly shows the boundary of the system (
+      <a href="../views/runtime/top-level-soa.html" title="wikilink">
+       example
+      </a>
+      )
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  UML diagrams assume the reader is familiar with the UML notation.
+  <ul>
+   <li>
+    In a few UML diagrams we provided a more detailed key showing the UML symbols being used.
+   </li>
+   <li>
+    Where we use a UML &lt;
+    <code>
+     &lt;stereotype&gt;
+    </code>
+    &gt; that is not self-explanatory, there is a note in the key comment box.
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  The language in the architecture documentation is more informal than in the main chapters of the DSA book. Like a real technical document produced by a software architect, this SAD has lots of technical terms, internal jargon, and acronyms. It may also have typos and grammatical errors.
+ </li>
+</ul>

@@ -1,0 +1,228 @@
+{
+  "pages": [
+    {
+      "source_id": "146280322",
+      "source_name": "AdventureBuilder+Documentation+Roadmap.html",
+      "path": "architecture/roadmap.html"
+    },
+    {
+      "source_id": "146280317",
+      "source_name": "System+Overview.html",
+      "path": "architecture/system-overview.html"
+    },
+    {
+      "source_id": "146280335",
+      "source_name": "Top+Level+Module+Uses+View.html",
+      "path": "architecture/views/modules/top-level-uses.html"
+    },
+    {
+      "source_id": "146280207",
+      "source_name": "OPC+Module+Decomposition+View.html",
+      "path": "architecture/views/modules/opc-decomposition.html"
+    },
+    {
+      "source_id": "146280240",
+      "source_name": "OPC+Module+Uses+View.html",
+      "path": "architecture/views/modules/opc-uses.html"
+    },
+    {
+      "source_id": "146280217",
+      "source_name": "Workflowmanager+Module+Uses+View.html",
+      "path": "architecture/views/modules/workflow-manager.html"
+    },
+    {
+      "source_id": "146280285",
+      "source_name": "Adventure+Builder+Data+Model.html",
+      "path": "architecture/views/modules/data-model.html"
+    },
+    {
+      "source_id": "146280294",
+      "source_name": "Top+Level+SOA+View.html",
+      "path": "architecture/views/runtime/top-level-soa.html"
+    },
+    {
+      "source_id": "146280307",
+      "source_name": "Consumer+Website+Multi-tier+View.html",
+      "path": "architecture/views/runtime/consumer-website.html"
+    },
+    {
+      "source_id": "146280255",
+      "source_name": "OPC+C&C+View.html",
+      "path": "architecture/views/runtime/opc.html"
+    },
+    {
+      "source_id": "146280277",
+      "source_name": "Deployment+View.html",
+      "path": "architecture/views/allocation/deployment.html"
+    },
+    {
+      "source_id": "146280272",
+      "source_name": "Install+View.html",
+      "path": "architecture/views/allocation/installation.html"
+    },
+    {
+      "source_id": "146280239",
+      "source_name": "OpcPurchaseOrderService+Interface+Documentation.html",
+      "path": "architecture/interfaces/purchase-order.html"
+    },
+    {
+      "source_id": "146280247",
+      "source_name": "OpcOrderTrackingService+Interface+Documentation.html",
+      "path": "architecture/interfaces/order-tracking.html"
+    },
+    {
+      "source_id": "146280425",
+      "source_name": "MappingBetweenViews.html",
+      "path": "architecture/crosscutting/view-mapping.html"
+    },
+    {
+      "source_id": "146280363",
+      "source_name": "Mapping+Requirements+to+Architecture.html",
+      "path": "architecture/crosscutting/requirements.html"
+    },
+    {
+      "source_id": "146280342",
+      "source_name": "Adventure+Builder+Glossary+and+Acronyms.html",
+      "path": "architecture/reference/glossary.html"
+    },
+    {
+      "source_id": "146280075",
+      "source_name": "Reference+Documentation.html",
+      "path": "architecture/reference/bibliography.html"
+    },
+    {
+      "source_id": "146280356",
+      "source_name": "Disclaimers.html",
+      "path": "architecture/reference/document-notes.html"
+    },
+    {
+      "source_id": "169412650",
+      "source_name": "Template:ArchitectureViewTemplate.html",
+      "path": "templates/architecture-view.html"
+    },
+    {
+      "source_id": "169412654",
+      "source_name": "Template:InterfaceTemplate.html",
+      "path": "templates/interface.html"
+    }
+  ],
+  "unavailable_links": [
+    {
+      "page": "architecture/views/runtime/top-level-soa.html",
+      "link": "https://wiki.sei.cmu.edu/confluence/display/SAD/Media:TopLevelC&CView.vsd",
+      "text": "Visio file",
+      "reason": "unavailable"
+    },
+    {
+      "page": "architecture/views/runtime/consumer-website.html",
+      "link": "https://wiki.sei.cmu.edu/confluence/display/SAD/Media:ConsumerWebsiteC&CRefinementUsingInformal.vsd",
+      "text": "Visio file",
+      "reason": "unavailable"
+    }
+  ],
+  "repaired_fragments": [
+    {
+      "page": "architecture/views/modules/top-level-uses.html",
+      "old": "../runtime/top-level-soa.html#Variability+Guide",
+      "fragment": "TopLevelSOAView-variabilityVariabilityGuide"
+    },
+    {
+      "page": "architecture/views/modules/top-level-uses.html",
+      "old": "../runtime/consumer-website.html#Variability+Guide",
+      "fragment": "ConsumerWebsiteMultitierView-variabilityVariabilityGuide"
+    },
+    {
+      "page": "architecture/views/modules/workflow-manager.html",
+      "old": "opc-uses.html#Element+Catalog",
+      "fragment": "OPCModuleUsesView-elementElementCatalog"
+    },
+    {
+      "page": "architecture/views/runtime/top-level-soa.html",
+      "old": "../../system-overview.html#Functionality",
+      "fragment": "SystemOverview-Functionality"
+    },
+    {
+      "page": "architecture/views/allocation/deployment.html",
+      "old": "../runtime/opc.html#Variability+Guide",
+      "fragment": "OPCC&CView-variabilityVariabilityGuide"
+    },
+    {
+      "page": "architecture/interfaces/purchase-order.html",
+      "old": "../views/allocation/deployment.html#Rationale",
+      "fragment": "DeploymentView-rationale"
+    },
+    {
+      "page": "architecture/interfaces/order-tracking.html",
+      "old": "purchase-order.html#Data+types+and+constants",
+      "fragment": "OpcPurchaseOrderServiceInterfaceDocumentation-dataDatatypesandconstants"
+    },
+    {
+      "page": "architecture/interfaces/order-tracking.html",
+      "old": "../views/allocation/deployment.html#Rationale",
+      "fragment": "DeploymentView-rationale"
+    }
+  ],
+  "assets": [
+    "assets/diagrams/adventurebuilder-usecase.png",
+    "assets/diagrams/consumerwebsitec-crefinementusinginformal-pp.png",
+    "assets/diagrams/datamodel-pp.png",
+    "assets/diagrams/deploymentview-pp.png",
+    "assets/diagrams/deploymentview-pp2.png",
+    "assets/diagrams/highlevelmoduleusesview-pp.png",
+    "assets/diagrams/implementationviewdeploy-pp.png",
+    "assets/diagrams/modulerefinementworkflowmanager-pp.png",
+    "assets/diagrams/modulerefinementworkflowmanager-sd.png",
+    "assets/diagrams/modulerefinementworkflowmanager-sd2.png",
+    "assets/diagrams/opcmoduledecompositionview-pp.png",
+    "assets/diagrams/opcmoduleusesview-cd.png",
+    "assets/diagrams/opcmoduleusesview-pp.png",
+    "assets/diagrams/opcruntimerefinementview-orderstatediagram.png",
+    "assets/diagrams/opcruntimerefinementview-pp.png",
+    "assets/diagrams/opcruntimerefinementview-pp2.png",
+    "assets/diagrams/toplevelc-cview-po-bpmn.png",
+    "assets/diagrams/toplevelc-cview-poactivitydiagram.png",
+    "assets/diagrams/toplevelc-cview-pp.png",
+    "assets/diagrams/toplevelc-cview-pp2.png",
+    "assets/downloads/adventurebuilder-usecase.vsd",
+    "assets/downloads/datamodel.vsd",
+    "assets/downloads/deploymentview.vsd",
+    "assets/downloads/highlevelmoduleusesview.vsd",
+    "assets/downloads/implementationviewdeploy.vsd",
+    "assets/downloads/modulerefinementworkflowmanager.vsd",
+    "assets/downloads/opcmoduledecompositionview.vsd",
+    "assets/downloads/opcmoduleusesview.vsd",
+    "assets/downloads/opcruntimerefinementview.vsd"
+  ],
+  "semantic_link_repairs": [
+    {
+      "page": "architecture/views/modules/opc-decomposition.html",
+      "text": "Order Tracking Web Service",
+      "old": "../../interfaces/purchase-order.html",
+      "new": "../../interfaces/order-tracking.html"
+    },
+    {
+      "page": "architecture/views/modules/opc-decomposition.html",
+      "text": "OpcOrderTrackingService interface documentation",
+      "old": "../../interfaces/purchase-order.html",
+      "new": "../../interfaces/order-tracking.html"
+    },
+    {
+      "page": "architecture/views/modules/top-level-uses.html",
+      "text": "Order Tracking Web Service",
+      "old": "../../interfaces/purchase-order.html",
+      "new": "../../interfaces/order-tracking.html"
+    },
+    {
+      "page": "architecture/views/modules/opc-uses.html",
+      "text": "Order Tracking Web Service",
+      "old": "../../interfaces/purchase-order.html",
+      "new": "../../interfaces/order-tracking.html"
+    },
+    {
+      "page": "architecture/views/modules/opc-uses.html",
+      "text": "OpcOrderTrackingService interface documentation",
+      "old": "../../interfaces/purchase-order.html",
+      "new": "../../interfaces/order-tracking.html"
+    }
+  ]
+}

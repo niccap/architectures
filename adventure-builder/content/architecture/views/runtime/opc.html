@@ -1,0 +1,399 @@
+<h2 id="OPCC&amp;CView-primaryPrimaryPresentation">
+ <span id="OPCC&amp;CView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <p>
+       Informal Notation
+      </p>
+     </th>
+    </tr>
+   </thead>
+  </table>
+ </div>
+</div>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/opcruntimerefinementview-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: opcruntimerefinementview pp" decoding="async" loading="lazy" src="../../../assets/diagrams/opcruntimerefinementview-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/opcruntimerefinementview.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <p>
+       UML
+      </p>
+     </th>
+    </tr>
+   </thead>
+  </table>
+ </div>
+</div>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/opcruntimerefinementview-pp2.png" title="Open the full-size diagram">
+    <img alt="Diagram: opcruntimerefinementview pp2" decoding="async" loading="lazy" src="../../../assets/diagrams/opcruntimerefinementview-pp2.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<h2 id="OPCC&amp;CView-elementElementCatalog">
+ <span id="OPCC&amp;CView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="OPCC&amp;CView-PoEndPointBean">
+ PoEndPointBean
+</h3>
+<p>
+ This stateless session bean implements the SOAP web services interface called
+ <a href="../../interfaces/purchase-order.html" title="wikilink">
+  OpcPurchaseOrderService
+ </a>
+ . When a purchase order request arrives, it simply validates the order and, if OK, sends the order to the WorkFlowMgrQueue using JMS.
+</p>
+<h3 id="OPCC&amp;CView-OtEndPointBean">
+ OtEndPointBean
+</h3>
+<p>
+ This stateless session bean implements the SOAP web services interface called
+ <a href="../../interfaces/order-tracking.html" title="wikilink">
+  OpcOrderTrackingService
+ </a>
+ . Requests for information about an order are handled by interacting with ProcessManagerBean. Order information is retrieved using the PurchaseOrderBean entity bean.
+</p>
+<h3 id="OPCC&amp;CView-WorkFlowManagerBean">
+ WorkFlowManagerBean
+</h3>
+<p>
+ This message-driven bean is activated when there is a message in the WorkFlowMgrQueue. It processes two kinds of messages:
+</p>
+<ul>
+ <li>
+  purchase order message. When processing such messages, this component interacts with ProcessManagerBean to insert the order in the database in the Pending state. Then it interacts synchronously with the Bank external service provider to validate and charge the customer's credit card. If the credit card is OK, it sends a message to the OrderFillerQueue JMS queue to be processed by OrderFillerBean. Finally, it sends another message to CRMQueue, which will be processed by CrmBean (send email to the customer informing the order is being processed).
+ </li>
+ <li>
+  invoice message. This is a message that came from one of the external suppliers in response for a booking order. When an invoice message is received, this component basically interacts with ProcessManagerBean to update the status of the corresponding order. If the message confirms the last invoice that is part of a travel package order, WorkFlowManagerBean sends a JMS message to CrmBean to notify the customer via email.
+ </li>
+</ul>
+<p>
+ WorkFlowManagerBean also sets a timer with the EJB container so that it is activated periodically to check the status of all pending orders.
+</p>
+<p>
+ WofkFlowManagerBean is one of the two components in the Adventure Builder system that act as service user of external services (the other is BrokerRequestorBean).
+</p>
+<p>
+ The life cycle of a purchase order can be summarized by the following UML state machine diagram.
+</p>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/opcruntimerefinementview-orderstatediagram.png" title="Open the full-size diagram">
+    <img alt="Diagram: opcruntimerefinementview orderstatediagram" decoding="async" loading="lazy" src="../../../assets/diagrams/opcruntimerefinementview-orderstatediagram.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<h3 id="OPCC&amp;CView-PurchaseOrderBean">
+ PurchaseOrderBean
+</h3>
+<p>
+ This entity bean persists the details of a purchase order (user who placed the order, date of the order, total price, head count, departure and arrival dates, departure city, etc.). The status of the order as it's processed is
+ <em>
+  not
+ </em>
+ stored within this entity bean; it's ManagerBean that keeps the order status.
+</p>
+<h3 id="OPCC&amp;CView-ActivityBean">
+ ActivityBean
+</h3>
+<p>
+ This entity bean persists the details of an activity reservation (activity id, location, price, date/time, head count).
+</p>
+<h3 id="OPCC&amp;CView-TransportationBean">
+ TransportationBean
+</h3>
+<p>
+ This entity bean persists the details of a flight reservation (e.g., origin, destination, carrier, flight id, departure time, arrival time, travel class, fare)
+</p>
+<h3 id="OPCC&amp;CView-LodgingBean">
+ LodgingBean
+</h3>
+<p>
+ This entity bean persists the details of a hotel reservation (hotel id, start date, number of nights, rate per night, number of rooms).
+</p>
+<h3 id="OPCC&amp;CView-CreditCardBean">
+ CreditCardBean
+</h3>
+<p>
+ This entity bean persists the credit card information (credit card number, type, expiration date, etc.) of a user.
+</p>
+<h3 id="OPCC&amp;CView-ProcessManagerBean">
+ ProcessManagerBean
+</h3>
+<p>
+ This session bean provides operations to retrieve and update the overall status of a purchase order and the status of the individual supplier orders.
+</p>
+<h3 id="OPCC&amp;CView-ManagerBean">
+ ManagerBean
+</h3>
+<p>
+ This entity bean is used by WorkFlowManagerBean to persist the status of the purchase order containing order id, order overall status, and the status of each separate supplier order.
+</p>
+<h3 id="OPCC&amp;CView-OrderFillerBean">
+ OrderFillerBean
+</h3>
+<p>
+ This component is used to process the purchaseorder. It reads the purchaseorder and splits it into smaller purchaseorders, one each for activities, transportation and lodging. It then sends each of these smaller purchaseorders to the webservicebroker that in turn sends them to external suppliers.
+</p>
+<ul>
+ <li>
+  It provides an interface called sendPO that is used by the workflowmanager to send purchaseorders.
+ </li>
+ <li>
+  It requires an interface sendRequest that it uses to send purchaseorders to each individual supplier.
+ </li>
+</ul>
+<h3 id="OPCC&amp;CView-BrokerRequestorBean">
+ BrokerRequestorBean
+</h3>
+<p>
+ This message driven bean makes requests to external suppliers. It requires the following interfaces:
+</p>
+<ul>
+ <li>
+  AirlinePOService - This is used to send purchaseorders to external airline suppliers.
+ </li>
+ <li>
+  ActivityPOService - This is used to send purchaseorders to external activity suppliers.
+ </li>
+ <li>
+  LodgingPOService - This is used to send purchaseorders to external lodging suppliers.
+ </li>
+</ul>
+<h3 id="OPCC&amp;CView-BrokerServiceBean">
+ BrokerServiceBean
+</h3>
+<p>
+ This component is the OPC's window to external suppliers for activities, lodging and transportation. It provides the following interfaces:
+</p>
+<ul>
+ <li>
+  WebServiceBroker - This is a web service that is used by the external suppliers to submit invoices back to the OPC.
+ </li>
+ <li>
+  getInvoice - This interface can provide the invoices that are sent by external suppliers.
+ </li>
+ <li>
+  sendRequest - This interface can be used to contact external suppliers and place orders with them.
+ </li>
+</ul>
+<h3 id="OPCC&amp;CView-CRMBean">
+ CRMBean
+</h3>
+<p>
+ This component is used for customer relationship management. For this application it is only used to communicate with the user. It reads messages from a queue, creates the corresponding email messages according to templates and I18N requirements, and sent them to users.
+</p>
+<h3 id="OPCC&amp;CView-WorkFlowMgrQueue">
+ WorkFlowMgrQueue
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="OPCC&amp;CView-OrderFillerQueue">
+ OrderFillerQueue
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="OPCC&amp;CView-WebServiceBrokerQueue">
+ WebServiceBrokerQueue
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="OPCC&amp;CView-CRMQueue">
+ CRMQueue
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="OPCC&amp;CView-ConsumerWebsite">
+ Consumer Website
+</h3>
+<p>
+ The ConsumerWebsite is a multi-tier application implemented using Java EE technology. It's the client facing part of the Adventure Builder system. It is implemented using GWT code, a number of JSP and html pages, and standard components of the WAF framework. Its primary responsibility is to process the http requests coming from customers browsing the catalog or placing/tracking orders. Requests to place or track orders are relayed to the OPC application via SOAP web services.
+</p>
+<p>
+ See the
+ <a href="consumer-website.html">
+  Consumer Website Multi-tier View
+ </a>
+ for a description of the internal components of Consumer Website.
+</p>
+<h3 id="OPCC&amp;CView-AdventureOPCDB">
+ Adventure OPC DB
+</h3>
+<p>
+ This relational database stores purchase orders, invoices coming from the external suppliers and related information. The database server is MySQL configured to use the InnoDB engine.
+</p>
+<h3 id="OPCC&amp;CView-serviceregistry">
+ service registry
+</h3>
+<p>
+ Data repository that works as a basic registry of the external services used by OPC. More specifically, it has name, location and metadata about all the SOAP web services offered by the banks, airline, lodging, and activity external partners. TBD: use a relational database or XML based files.
+</p>
+<h3 id="OPCC&amp;CView-Bank">
+ Bank
+</h3>
+<p>
+ This component represents an external application hosted by a bank or credit card administrator. The application provides a SOAP web service to verify customers' credit card information.
+</p>
+<h3 id="OPCC&amp;CView-AirlineProvider">
+ Airline Provider
+</h3>
+<p>
+ This component represents an external application hosted by an airline partner company. The application provides a SOAP web service to book air travel.
+</p>
+<h3 id="OPCC&amp;CView-LodgingProvider">
+ Lodging Provider
+</h3>
+<p>
+ This component represents an external application hosted by a lodging partner company. The application provides a SOAP web service to book hotel rooms.
+</p>
+<h3 id="OPCC&amp;CView-ActivityProvider">
+ Activity Provider
+</h3>
+<p>
+ This component represents an external application hosted by an activity provider partner company. The application provides a SOAP web service to book adventure activities, such as hot air ballooning, surf classes, and mountain climbing expeditions.
+</p>
+<h3 id="OPCC&amp;CView-User'semailclient">
+ User's email client
+</h3>
+<p>
+ This is the email inbox of the end user (vacationer) who placed an adventure travel purchase request. OPC sends email notifications to the user via SMTP to inform of the status of the orders.
+</p>
+<h2 id="OPCC&amp;CView-contextContextDiagram">
+ <span id="OPCC&amp;CView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ See
+ <a href="../modules/opc-uses.html">
+  OPC Module Uses View - Context Diagram
+ </a>
+</p>
+<h2 id="OPCC&amp;CView-variabilityVariabilityGuide">
+ <span id="OPCC&amp;CView-variability">
+ </span>
+ Variability Guide
+</h2>
+<h3 id="OPCC&amp;CView-Addorremovebank">
+ Add or remove bank
+</h3>
+<p>
+ The system allows adding or removing partner banks by keeping a registry of the external services (element 'service registry' in the
+ <a href="top-level-soa.html">
+  Top Level SOA View
+ </a>
+ ). A new bank has to implement the CreditCardService interface. At run time new banks are identified by OPC by querying the registry for external services that implement that interface.
+</p>
+<h3 id="OPCC&amp;CView-Addorremoveairline,lodgingoractivityprovider">
+ Add or remove airline, lodging or activity provider
+</h3>
+<p>
+ The system allows adding an partner provider by keeping a registry of the external services (element 'service registry' in the
+ <a href="top-level-soa.html">
+  Top Level SOA View
+ </a>
+ ).
+</p>
+<ul>
+ <li>
+  A new airline has to implement the AirlinePOService interface. At run time new airlines are identified by OPC by querying the registry for external services that implement that interface.
+ </li>
+ <li>
+  A new lodging provider has to implement the LodgingPOService interface. At run time new lodging providers are identified by OPC by querying the registry for external services that implement that interface.
+ </li>
+ <li>
+  A new activity provider has to implement the ActivityPOService interface. At run time new activity providers are identified by OPC by querying the registry for external services that implement that interface.
+ </li>
+</ul>
+<p>
+ The webservicebroker module provides an abstraction layer within the OPC that contacts all external partner providers. Other modules of OPC are oblivious to changes in the set of available suppliers. Other modules only know the identity of the new supplier.
+</p>
+<h3 id="OPCC&amp;CView-EJBconfiguration">
+ EJB configuration
+</h3>
+<p>
+ For each EJb, a pool of bean instances is provided by the application server. There are three parameters that can be configured separately for each EJB via deployment descriptor:
+</p>
+<ul>
+ <li>
+  minimum (and initial) number of bean instances in the pool
+ </li>
+ <li>
+  maximum number of bean instances in the pool
+ </li>
+ <li>
+  timeout for an idle instance to be passivated or deleted
+ </li>
+</ul>
+<h2 id="OPCC&amp;CView-rationaleRationale">
+ <span id="OPCC&amp;CView-rationale">
+ </span>
+ Rationale
+</h2>
+<p>
+ <em>
+  TODO: Describe here the rationale for any significant design decisions whose scope is limited to this view. Also describe any significant rejected alternatives. This section may also indicate assumptions, constraints, results of analysis and experiments, and architecturally significant requirements that affect the view.
+ </em>
+</p>
+<h2 id="OPCC&amp;CView-relatedRelatedViews">
+ <span id="OPCC&amp;CView-related">
+ </span>
+ Related Views
+</h2>
+<p>
+ Parent view:
+ <a href="top-level-soa.html" title="wikilink">
+  Top Level SOA View
+ </a>
+</p>
+<ul>
+ <li>
+  Interface documentation:
+  <ul>
+   <li>
+    <a href="../../interfaces/purchase-order.html" title="wikilink">
+     OpcPurchaseOrderService Interface Documentation
+    </a>
+   </li>
+   <li>
+    <a href="../../interfaces/order-tracking.html" title="wikilink">
+     OpcOrderTrackingService Interface Documentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>

@@ -1,0 +1,326 @@
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-interfaceInterfaceidentity">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-interface">
+ </span>
+ Interface identity
+</h2>
+<p>
+ The is a SOAP web service interface named
+ <strong>
+  OpcPurchaseOrderService
+ </strong>
+ . The main purpose of this web service is to allow clients to place a purchase order.
+</p>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-resourcesResources">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-resources">
+ </span>
+ Resources
+</h2>
+<pre><code>String submitPurchaseOrder(PurchaseOrder poObject)</code></pre>
+<p>
+ Submit a complete purchase order for an adventure package. This operation returns the order ID as a String. The operation simply checks if the PurchaseOrder argument is valid. If it is valid, the order is created in the database and this operation returns to the caller. The actual processing of the purchase order is carried on in background. If there is some unforeseen error during the processing of the purchase order after this operation has returned to the caller, the error is handled elsewhere and is not the responsibility of this interface.
+</p>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Pre-conditions">
+ Pre-conditions
+</h3>
+<ul>
+ <li>
+  The PurchaseOrder argument must not be null.
+ </li>
+ <li>
+  The following components of the PurchaseOrder argument must not be null: user-id, email-id, locale, order date, shipping information, billing information, total price, credit card information, head count information, start date, end date and departure city
+ </li>
+</ul>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Post-conditions">
+ Post-conditions
+</h3>
+<ul>
+ <li>
+  A successful call to this interface will return a unique purchase order id.
+ </li>
+</ul>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Usagerestrictions">
+ Usage restrictions
+</h3>
+<ul>
+ <li>
+  <em>
+   Authorization.
+  </em>
+  Can only be called by signed in users.
+ </li>
+ <li>
+  <em>
+   Concurrent access.
+  </em>
+  There isn't any limitation on the number of concurrent accesses of this interface. The service is implemented by using EJBs and concurrent calls to it are managed by the EJB container.
+ </li>
+</ul>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Errorhandling">
+ Error handling
+</h3>
+<ul>
+ <li>
+  <strong>
+   InvalidPOException
+  </strong>
+  . The service throws this exception if the purchase order is null, or if any of the components that make up the purchase order is null.
+ </li>
+ <li>
+  <strong>
+   ProcessingException
+  </strong>
+  . If the processing of the purchase order fails after it has passed its validation (i.e., there is no InvalidPOException), then a ProcessingException is thrown. This indicates that the purchase order is valid but something has gone wrong while placing the order.
+ </li>
+</ul>
+<pre><code>boolean cancelPurchaseOrder(String orderId)</code></pre>
+<p>
+ Cancel the given purchase order. The operation returns true if the order was canceled successfully; it returns false when the purchase order processing is in a state where some bookings are already confirmed and cannot be canceled.
+</p>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Pre-conditions.1">
+ Pre-conditions
+</h3>
+<ul>
+ <li>
+  The orderId argument is not null and corresponds to an existing purchase order.
+ </li>
+</ul>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Post-conditions.1">
+ Post-conditions
+</h3>
+<ul>
+ <li>
+  If the operation returns true, the order is canceled and all reservations corresponding to this order are canceled. Charges to the customer credit card, if any were made, are also canceled.
+ </li>
+ <li>
+  If the operation returns false, the state of the order remains unchanged.
+ </li>
+</ul>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Usagerestrictions.1">
+ Usage restrictions
+</h3>
+<ul>
+ <li>
+  <em>
+   Authorization.
+  </em>
+  This operation can only be called by a signed in user. A customer user can only cancel purchase orders he created. A sales representative user can cancel any order.
+ </li>
+</ul>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Errorhandling.1">
+ Error handling
+</h3>
+<ul>
+ <li>
+  <strong>
+   InvalidPOException
+  </strong>
+  . The service throws this exception if the order ID is null or the corresponding order doesn't exist.
+ </li>
+ <li>
+  <strong>
+   ProcessingException
+  </strong>
+  . Thrown if the order exists but is already canceled.
+ </li>
+</ul>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-dataDatatypesandconstants">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-data">
+ </span>
+ Data types and constants
+</h2>
+<ul>
+ <li>
+  <strong>
+   Type PurchaseOrder
+  </strong>
+  . This type is used as an argument to the submitPurchaseOrder operation. It is a data structure that contains all the necessary information to place an order. The attributes of a PurchaseOrder object are listed below.
+ </li>
+</ul>
+<pre><code>String poId 
+String userId 
+String emailId 
+DateTime orderDate 
+DateTime startDate
+Activity[] activities 
+ContactInfo billingInfo  
+ContactInfo shippingInfo 
+CreditCard creditCard  
+String departureCity 
+Transportation departureFlightInfo
+Transportation returnFlightInfo 
+Lodging lodging 
+DateTime endDate  
+int headCount 
+String locale 
+float totalPrice</code></pre>
+<ul>
+ <li>
+  <strong>
+   Type Activity
+  </strong>
+  . This type is used to describe each activity that the user chooses as part of the purchase order.
+ </li>
+</ul>
+<pre><code>String activityId
+DateTime endDate  
+int headCount 
+String location 
+String name 
+float price 
+DateTime startDate </code></pre>
+<ul>
+ <li>
+  <strong>
+   Type ContactInfo
+  </strong>
+  . This type is used to store the contact information of the user.
+ </li>
+</ul>
+<pre><code>Address address  
+String email 
+String familyName 
+String givenName 
+String phone </code></pre>
+<ul>
+ <li>
+  <strong>
+   Type Address
+  </strong>
+  . This type is used to store the address of the user.
+ </li>
+</ul>
+<pre><code>String city 
+String country 
+String postalCode 
+String state 
+String streetName1 
+String streetName2 </code></pre>
+<ul>
+ <li>
+  <strong>
+   Type CreditCard
+  </strong>
+  . This type is used to store the credit card information of the user.
+ </li>
+</ul>
+<pre><code>String cardExpiryDate 
+String cardNumber 
+String cardType </code></pre>
+<ul>
+ <li>
+  <strong>
+   Type Transporation
+  </strong>
+  . This type is used to store the airline information, and other transport related information of the purchase order.
+ </li>
+</ul>
+<pre><code>String carrier 
+DateTime departureDate  
+String departureTime 
+String destination 
+int headCount 
+String origin 
+float price 
+String transportationId 
+String travelClass </code></pre>
+<ul>
+ <li>
+  <strong>
+   Type Lodging
+  </strong>
+  . This type is used to store the lodging information of the purchase order.
+ </li>
+</ul>
+<pre><code>DateTime endDate  
+String location 
+String lodgingId 
+String name 
+int noNights 
+int noRooms 
+float pricePerNight 
+DateTime startDate </code></pre>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-errorErrorhandling">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-error">
+ </span>
+ Error handling
+</h2>
+<p>
+ All operations in this interface can raise the following exception, in addition to operation specific exceptions:
+</p>
+<ul>
+ <li>
+  <strong>
+   RemoteException
+  </strong>
+  . The caller receives a RemoteException when there is a communication problem with the service provider implementing this interface.
+ </li>
+</ul>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-variabilityVariability">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-variability">
+ </span>
+ Variability
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-qualityQualityattributecharacteristics">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-quality">
+ </span>
+ Quality attribute characteristics
+</h2>
+<ul>
+ <li>
+  <strong>
+   Scalability
+  </strong>
+  : see discussion in
+  <a href="../views/allocation/deployment.html#DeploymentView-rationale" title="wikilink">
+   Deployment View - Rationale
+  </a>
+  .
+ </li>
+ <li>
+  <strong>
+   Modifiability
+  </strong>
+  : this is an asynchronous service that results in loose coupling between the consumer website and the order processing center. Moreover, the SOAP interface defined in WSDL can be versioned and more than one version can be supported.
+ </li>
+</ul>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-rationaleRationaleanddesignissues">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-rationale">
+ </span>
+ Rationale and design issues
+</h2>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-Coarse-grainedgranularityofservice">
+ Coarse-grained granularity of service
+</h3>
+<p>
+ Currently we only expose placing a purchase order as a single web service that includes placing orders for activities, transportation and lodging. We don't provide separate operations to place an order only for flights, lodging or activities. Therefore, this interface is less flexible in terms of composing different kinds of orders. On the other hand, submitting a complete purchase order involves a single call.
+</p>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-UsingJAX-RPCforpassingparameters">
+ Using JAX-RPC for passing parameters
+</h3>
+<p>
+ Since the consumer website and the order processing center reside in the same enterprise, we avoid using complex XML processing and pass parameters as Java objects. It makes the interface slightly less interoperable but simplifies implementation.
+</p>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-PublishingthewebserviceasaWSDL">
+ Publishing the web service as a WSDL
+</h3>
+<p>
+ This web service is published as a WSDL in a well known location (static web service instead of using a registry) since it is not available for general public use. It is only used by the consumer website. The option to use SOAP instead of Java RMI or direct EJB calls is motivated by the possibility of replacing the Consumer website implementation with a different technology (e.g., .NET); SOAP can provide the required interoperability in that case.
+</p>
+<h3 id="OpcPurchaseOrderServiceInterfaceDocumentation-UsingtheEJBendpointtype">
+ Using the EJB endpoint type
+</h3>
+<p>
+ We chose the EJB endpoint type because the order processing center is implemented using a set of session beans.
+</p>
+<h2 id="OpcPurchaseOrderServiceInterfaceDocumentation-usageUsageguide">
+ <span id="OpcPurchaseOrderServiceInterfaceDocumentation-usage">
+ </span>
+ Usage guide
+</h2>
+<pre><code>Context ic = new InitialContext();
+Service opcPurchaseOrderSvc = (Service) ic.lookup("java:comp/env/service/OpcPurchaseOrderService");
+PurchaseOrderIntf port = (PurchaseOrderIntf) opcPurchaseOrderSvc.getPort(PurchaseOrderIntf.class);
+String orderId = port.submitPurchaseOrder(myPurchaseOrder);</code></pre>

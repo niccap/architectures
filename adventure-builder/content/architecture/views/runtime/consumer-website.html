@@ -1,0 +1,304 @@
+<h2 id="ConsumerWebsiteMultitierView-primaryPrimaryPresentation">
+ <span id="ConsumerWebsiteMultitierView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<p>
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/consumerwebsitec-crefinementusinginformal-pp.png" title="Open the full-size diagram">
+   <img alt="Diagram: consumerwebsitec crefinementusinginformal pp" decoding="async" loading="lazy" src="../../../assets/diagrams/consumerwebsitec-crefinementusinginformal-pp.png"/>
+  </a>
+ </span>
+</p>
+<p>
+ Visio file not available in the original download.
+</p>
+<h2 id="ConsumerWebsiteMultitierView-elementElementCatalog">
+ <span id="ConsumerWebsiteMultitierView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="ConsumerWebsiteMultitierView-Webbrowser">
+ Web browser
+</h3>
+<p>
+ This component represents the user interface of the application running on a web browser. Consumer Website is a Web 2.0 application implemented using GWT. Therefore, in addition to HTML, the web browser runs JavaScript code that uses Ajax to communicate with the server. Using the web browser, a customer of Adventure Builder opens the web site, browses through the existing catalog of adventure packages, places orders, and tracks the status of existing orders.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-SignOnFilter">
+ SignOnFilter
+</h3>
+<p>
+ This component is a
+ <a href="http://java.sun.com/javaee/6/docs/api/javax/servlet/Filter.html">
+  Java EE Filter
+ </a>
+ . It intercepts all http requests (url pattern is "/*") and checks if the current user (if any) has authorization to perform the requested transaction (identified by the selected URL). If an unsigned in user requested a page that requires a signed in user, the call is redirected to the sign in page.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-sign-on-config.xml">
+ sign-on-config.xml
+</h3>
+<p>
+ This xml file contains configurable information about the authentication and authorization constraints for specific URLs (i.e., operations) in the system. It also has the URLs for the sign in page and sign in error page.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-MainServlet">
+ MainServlet
+</h3>
+<p>
+ This servlet is part of the WAF framework. It corresponds to the controller component in the MVC implementation within WAF. It processes http requests to URLs that end with ".do" and correspond to user clicks (e.g., submit button on a form). Internally, this servlet uses a configurable table loaded at initialization that maps each particular URL to the Consumer Website action class that will process that request. These action classes extend HTMLActionSupport. Each specific action class will instantiate specific POJOs and interact with specific facade session beans. The URL mapping table is read from the mappings.xml file.
+</p>
+<p>
+ After the execution of the action class, the http request is forwarded to a URL that ends with ".screen". The mapping between specific actions and screens is also configurable and stored in mappings.xml. Calls to *.screen are handled by TemplateServlet.
+</p>
+<p>
+ MainServlet is also responsible for database transaction demarcation: if the requested user operation is transactional, this component starts a transaction and calls commit or rollback when processing the request is finished.
+</p>
+<p>
+ MainServlet is also responsible for centralized exception handling in the Consumer Website application. Exceptions that bubble up to MainServlet are caught and based on a mapping defined in mappings.xml, the http request is forwarded to a specific ".screen" URL (typically an error page).
+</p>
+<h3 id="ConsumerWebsiteMultitierView-mappings.xml">
+ mappings.xml
+</h3>
+<p>
+ Simple xml file that contains the mappings of URLs (ending with ".do") to: action classes (subclasses of HTMLActionSupport) and ".screen" URLs. This file also contains the mapping of Java exception classes to ".screen" URLs.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-TemplateServlet">
+ TemplateServlet
+</h3>
+<p>
+ This servlet is also part of the WAF framework. During initialization, this servlet retrieves the current locale and reads the proper i18n configurable data from screendefinitions.xml. Other configurable parameters are defined in web.xml (not shown in the primary presentation).
+ <br/>
+ When this servlet receives a forwarded http request from MainServlet, it uses the mapping between screen names (URL ends with ".screen") and JSP pages to once again forward the request to the appropriate JSP pages. These JSP pages are called
+ <em>
+  screen JSP
+ </em>
+ .
+</p>
+<h3 id="ConsumerWebsiteMultitierView-screendefinitions.xml">
+ screendefinitions.xml
+</h3>
+<p>
+ All screens in the website have the same structure: a title, a banner, a sidebar, a footer and the body. The screendefinitions.xml file contains a configurable mapping between screen names and the set of JSP pages that compose the title, banner, sidebar, footer and body of that screen.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-screenJSP">
+ screen JSP
+</h3>
+<p>
+ A regular JSP that corresponds to a (part of a) web screen. The data required for filling up the fields in a screen JSP was set in the http request by MainServlet when the action was executed. However, in some situations, a screen JSP makes calls to the facade session beans to retrieve additional data.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-index.jsp">
+ index.jsp
+</h3>
+<p>
+ This is the welcome page of the Consumer Website application. It has basically links to sign in and other basic operations.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-SignOnNotifier">
+ SignOnNotifier
+</h3>
+<p>
+ This component is a context listener. More specifically, it is a
+ <a href="http://java.sun.com/javaee/6/docs/api/javax/servlet/http/HttpSessionAttributeListener.html">
+  HttpSessionAttributeListener
+ </a>
+ . It is invoked by the container whenever an attribute in the http session changes. When the signed in user attribute is removed because the user signed out or the http session expired, this component releases resources that were allocated for that user.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-OrderFacade">
+ OrderFacade
+</h3>
+<p>
+ This stateless session bean is a lightweight implementation of the Session Facade pattern [Marinescu 2002]. It provides operations that correspond to the business logic of use cases related to purchase order. More specifically, it provides operations to place an order and track the status of a given order. To carry on these operations, the session bean interacts with the OPC application via SOAP web services.
+</p>
+<p>
+ In addition, this session bean has operations to add and remove items to and from the user's shopping cart.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-CatalogFacade">
+ CatalogFacade
+</h3>
+<p>
+ This stateless session bean is a lightweight implementation of the Session Facade pattern [Marinescu 2002]. It provides operations related to the catalog of adventure packages. It allows browsing and searching the catalog, and looking at details of a given adventure travel package.
+ <br/>
+ Internally, this session bean makes use of DAO classes to retrieve the information in Adventure Catalog DB.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-UserMgmtFacade">
+ UserMgmtFacade
+</h3>
+<p>
+ This stateless session bean also implements the Session Facade pattern [Marinescu 2002]. It provides operations related to user management, which include: retrieving and updating user data, validating user-ID/password sign on, blocking a user after a certain number of unsuccessful sign in attempts.
+ <br/>
+ Internally, this session bean makes use of DAO classes to retrieve the information in Adventure Catalog DB.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-OPC">
+ OPC
+</h3>
+<p>
+ OPC is the order processing center application. It's a Java EE application that communicates with external components using SOAP web services.Internally, it consists of loosely coupled EJBs that communicate with each other using primarily asynchronous messaging. The internal architecture follows the message channel design pattern [Hohpe 2003]. See the
+ <a href="opc.html">
+  OPC C&amp;C View
+ </a>
+ for a description of the internal components of OPC. The core functionality of the Adventure Builder is implemented in this module. Its major functions are:
+</p>
+<ul>
+ <li>
+  Accept purchase order requests from the ConsumerWebsite for processing.
+ </li>
+ <li>
+  Fill a purchase order by communicating with external suppliers.
+ </li>
+ <li>
+  Provide a mechanism for the Consumer Website to query the current status of a purchase order.
+ </li>
+ <li>
+  Upon completion of processing a purchase order, send an email to the customer reporting its success or failure.
+ </li>
+</ul>
+<p>
+ OPC provides the following interfaces, which are exposed as SOAP web services:
+</p>
+<ul>
+ <li>
+  <a href="../../interfaces/purchase-order.html">
+   OpcPurchaseOrderService
+  </a>
+  - used to create a purchase order.
+ </li>
+ <li>
+  <a href="../../interfaces/order-tracking.html">
+   OpcOrderTrackingService
+  </a>
+  - used to track the status of a purchase order.
+ </li>
+ <li>
+  <a href="../../documentation-status.html#web-service-broker">
+   WebServiceBroker
+  </a>
+  - used by external suppliers to submit invoices back to OPC.
+ </li>
+</ul>
+<p>
+ OPC requires the following interfaces, which are provided by external partners as SOAP web services:
+</p>
+<ul>
+ <li>
+  CreditCardService - used to validate the credit card transaction with a bank.
+ </li>
+ <li>
+  AirlinePOService - used to send purchase orders to external airline suppliers.
+ </li>
+ <li>
+  LodgingPOService - used to send purchase orders to external lodging suppliers.
+ </li>
+ <li>
+  ActivityPOService - used to send purchase orders to external activity suppliers.
+ </li>
+</ul>
+<p>
+ The UML activity diagram below shows the processing of a purchase order. It uses a split-and-join pattern when filling an order. For simplicity, the diagram does not show interaction with a database. Following is the equivalent diagram using the BPMN notation.
+</p>
+<p>
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/toplevelc-cview-poactivitydiagram.png" title="Open the full-size diagram">
+   <img alt="Diagram: toplevelc cview poactivitydiagram" decoding="async" loading="lazy" src="../../../assets/diagrams/toplevelc-cview-poactivitydiagram.png"/>
+  </a>
+ </span>
+</p>
+<p>
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/toplevelc-cview-po-bpmn.png" title="Open the full-size diagram">
+   <img alt="Diagram: toplevelc cview po bpmn" decoding="async" loading="lazy" src="../../../assets/diagrams/toplevelc-cview-po-bpmn.png"/>
+  </a>
+ </span>
+</p>
+<h3 id="ConsumerWebsiteMultitierView-AdventureCatalogDB">
+ Adventure Catalog DB
+</h3>
+<p>
+ This is a relational database that stores the adventure builder catalog containing various adventure packages. It also stores information about users for user authentication and authorization. The database server is MySQL Cluster 7.0 configured to use the InnoDB engine.
+</p>
+<h2 id="ConsumerWebsiteMultitierView-contextContextDiagram">
+ <span id="ConsumerWebsiteMultitierView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="ConsumerWebsiteMultitierView-variabilityVariabilityGuide">
+ <span id="ConsumerWebsiteMultitierView-variability">
+ </span>
+ Variability Guide
+</h2>
+<h3 id="ConsumerWebsiteMultitierView-Internationalization">
+ Internationalization
+</h3>
+<p>
+ The Consumer Website supports multiple languages. All user messages are stored in a xml file for which there's a different version for each locale (these files are named based on the
+ <a href="http://java.sun.com/developer/technicalArticles/Intl/ResourceBundles/|standard">
+  Java convention for localized files
+ </a>
+ ). Changing the xml file or adding a new one for a different locale requires redeploying the Consumer Website application.
+</p>
+<h3 id="ConsumerWebsiteMultitierView-Signon">
+ Sign on
+</h3>
+<p>
+ There are two configurable parameters related to user sign-on:
+</p>
+<ul>
+ <li>
+  The number of unsuccessful sign on attempts before blocking the user account temporarily.
+ </li>
+ <li>
+  The amount of time in minutes the account remains blocked. Only after that period of time has elapsed, the user will be able to try to sign on again.
+ </li>
+</ul>
+<p>
+ These parameters can be modified by editing sign-on-config.xml and restarting the application.
+</p>
+<h2 id="ConsumerWebsiteMultitierView-rationaleRationale">
+ <span id="ConsumerWebsiteMultitierView-rationale">
+ </span>
+ Rationale
+</h2>
+<h3 id="ConsumerWebsiteMultitierView-WAF">
+ WAF
+</h3>
+<p>
+ The WAF framework was chosen because it facilitates the implementation of the Consumer Website code by providing template classes for using the MVC pattern. For a given user operation, the developer implements an action class (controller) and JSP pages that correspond to the user screens (view). The developer also uses configuration files to provide a configurable mapping between actions, action classes, events and screens. The WAF infrastructure can then automatically take http requests and invoke the action classes and JSP screens. WAF also provides support for event-based communication and internationalization.
+</p>
+<p>
+ WAF also provides support for event-based communication and internationalization.
+</p>
+<p>
+ An alternative to WAF was to use the
+ <a href="https://spring.io/">
+  Spring framework
+ </a>
+ . Spring was a more robust and rich solution from a technical standpoint, but it was rejected because the development team is not familiar with Spring and very familiar with WAF.
+</p>
+<h2 id="ConsumerWebsiteMultitierView-relatedRelatedViews">
+ <span id="ConsumerWebsiteMultitierView-related">
+ </span>
+ Related Views
+</h2>
+<ul>
+ <li>
+  Parent view:
+  <a href="top-level-soa.html" title="wikilink">
+   Top Level SOA View
+  </a>
+ </li>
+ <li>
+  Interface documentation:
+  <ul>
+   <li>
+    <a href="../../interfaces/purchase-order.html" title="wikilink">
+     OpcPurchaseOrderService Interface Documentation
+    </a>
+   </li>
+   <li>
+    <a href="../../interfaces/order-tracking.html" title="wikilink">
+     OpcOrderTrackingService Interface Documentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>

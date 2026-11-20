@@ -1,0 +1,177 @@
+<h2 id="WorkflowmanagerModuleUsesView-primaryPrimaryPresentation">
+ <span id="WorkflowmanagerModuleUsesView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/modulerefinementworkflowmanager-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: modulerefinementworkflowmanager pp" decoding="async" loading="lazy" src="../../../assets/diagrams/modulerefinementworkflowmanager-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/modulerefinementworkflowmanager.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<h2 id="WorkflowmanagerModuleUsesView-elementElementCatalog">
+ <span id="WorkflowmanagerModuleUsesView-element">
+ </span>
+ Element Catalog
+</h2>
+<p>
+ <em>
+  For a description of elements not listed below, see
+  <a href="opc-uses.html#OPCModuleUsesView-elementElementCatalog" title="wikilink">
+   OPC Module Uses View - Element Catalog
+  </a>
+  .
+ </em>
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-PoEndPointBean">
+ PoEndPointBean
+</h3>
+<p>
+ This class is a stateless session bean. It provides the implementation for the
+ <a href="../../interfaces/purchase-order.html" title="wikilink">
+  OpcPurchaseOrderService web service
+ </a>
+ . When it receives a purchase order, it checks that all arguments are valid and if ok dispatches the order to the workflowmanager sending a message to a JMS queue.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-WorkFlowManagerBean">
+ WorkFlowManagerBean
+</h3>
+<p>
+ This class is a message-driven bean. It is activated when there is a message in the queue. It processes two kinds of messages:
+</p>
+<ul>
+ <li>
+  purchase order message: in this case it calls the PoHandler class. The sequence diagram down below shows the interactions involved in processing a purchase order.
+ </li>
+ <li>
+  invoice message: this is a message that came from one of the external suppliers in response for a booking order. WorkFlowManagerBean calls the InvoiceHandler class to take care of this messages.
+ </li>
+</ul>
+<p>
+ WorkFlowManagerBean also sets a timer with the EJB container so that it is activated periodically to check the status of all pending orders.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-PoHandler">
+ PoHandler
+</h3>
+<p>
+ The PoHandler class is not visible outside the workflowmanager package. It acts as a delegate of the WorkFlowManagerBean class to handle any purchase order request. When processing a request, it first uses POReceiver and processmanager to insert the order in the database in the Pending state. Then it calls CreditCardVerifier synchronously to charge the customer's credit card. If the credit card is OK, it sends a message to a JMS queue to be processed by OrderFillerBean. Finally, it sends another JMS message to CrmBean, which will create and send an email to the customer informing about the status of his order.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-InvoiceHandler">
+ InvoiceHandler
+</h3>
+<p>
+ The InvoiceHandler is not visible outside the workflowmanager package. It acts as a delegate of the WorkflowManagerBean class to handle any invoice it receives from any of the suppliers. When an invoice is received, InvoiceHandler basically uses processmanager to update the status of the corresponding order.
+ <br/>
+ A given adventure package order may consist of:
+</p>
+<ul>
+ <li>
+  zero or one hotel booking
+ </li>
+ <li>
+  zero, one or two airline flights (departing and returning flight)
+ </li>
+ <li>
+  zero or more activity items
+ </li>
+</ul>
+<p>
+ When InvoiceHandler receives the last invoice confirming completion of the reservation, it sends a JMS message to CrmBean to notify the customer via email.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-CrmBean">
+ CrmBean
+</h3>
+<p>
+ This class is a message-driven bean. It is responsible for handling the communication with customers via email.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-CreditCardVerifier">
+ CreditCardVerifier
+</h3>
+<p>
+ This class is used to verify the credit information for a user. It contacts an external web service to get the banking related information for the credit card number specified.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-OrderFillerBean">
+ OrderFillerBean
+</h3>
+<p>
+ This class is a message-driven bean. It is responsible for sending out all the booking requests to the airline, lodging and activity suppliers involved in a given purchase order.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-POReceiver">
+ POReceiver
+</h3>
+<p>
+ The purchase order receiver's responsibility is to create a purchase order entity bean and persist it in a relational database. The POReceiver is implemented as a Java class and it creates a PurchaseOrder entity bean.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-Invoice">
+ Invoice
+</h3>
+<p>
+ This "value object" class holds the data for an invoice that arrives from any of the external suppliers. It has a method to provide an XML representation of the invoice.
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-Sequencediagram-purchaseorderwithinworkflowmanager">
+ Sequence diagram - purchase order within workflowmanager
+</h3>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/modulerefinementworkflowmanager-sd.png" title="Open the full-size diagram">
+    <img alt="Diagram: modulerefinementworkflowmanager sd" decoding="async" loading="lazy" src="../../../assets/diagrams/modulerefinementworkflowmanager-sd.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<h3 id="WorkflowmanagerModuleUsesView-Sequencediagram-orderfilling">
+ Sequence diagram - order filling
+</h3>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/modulerefinementworkflowmanager-sd2.png" title="Open the full-size diagram">
+    <img alt="Diagram: modulerefinementworkflowmanager sd2" decoding="async" loading="lazy" src="../../../assets/diagrams/modulerefinementworkflowmanager-sd2.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<h2 id="WorkflowmanagerModuleUsesView-contextContextDiagram">
+ <span id="WorkflowmanagerModuleUsesView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="WorkflowmanagerModuleUsesView-variabilityVariabilityGuide">
+ <span id="WorkflowmanagerModuleUsesView-variability">
+ </span>
+ Variability Guide
+</h2>
+<p>
+ SMTP host, message body contents, subject, sender address and reply-to address for all email messages sent by CrmBean are configurable via text files that can be changed at run time, but require reinitialization of the application to take effect. These files are implemented using standard Java i18n support.
+</p>
+<h2 id="WorkflowmanagerModuleUsesView-rationaleRationale">
+ <span id="WorkflowmanagerModuleUsesView-rationale">
+ </span>
+ Rationale
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="WorkflowmanagerModuleUsesView-relatedRelatedViews">
+ <span id="WorkflowmanagerModuleUsesView-related">
+ </span>
+ Related Views
+</h2>
+<p>
+ Parent view:
+ <a href="opc-uses.html" title="wikilink">
+  OPC Module Uses View
+ </a>
+</p>

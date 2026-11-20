@@ -1,0 +1,188 @@
+[
+  {
+    "path": "architecture/roadmap.html",
+    "title": "Documentation roadmap",
+    "group": "Introduction",
+    "description": "The scope, organization and intended readers of this document.",
+    "source_id": "146280322",
+    "source_name": "AdventureBuilder+Documentation+Roadmap.html"
+  },
+  {
+    "path": "architecture/system-overview.html",
+    "title": "System overview",
+    "group": "Introduction",
+    "description": "Functionality, use cases and quality attribute requirements.",
+    "source_id": "146280317",
+    "source_name": "System+Overview.html"
+  },
+  {
+    "path": "architecture/views/modules/top-level-uses.html",
+    "title": "Top level module uses",
+    "group": "Views · Modules",
+    "description": "Dependencies between the main system modules.",
+    "source_id": "146280335",
+    "source_name": "Top+Level+Module+Uses+View.html"
+  },
+  {
+    "path": "architecture/views/modules/opc-decomposition.html",
+    "title": "OPC module decomposition",
+    "group": "Views · Modules",
+    "description": "Responsibilities and decomposition of the Order Processing Center.",
+    "source_id": "146280207",
+    "source_name": "OPC+Module+Decomposition+View.html"
+  },
+  {
+    "path": "architecture/views/modules/opc-uses.html",
+    "title": "OPC module uses",
+    "group": "Views · Modules",
+    "description": "Internal and external dependencies of the OPC modules.",
+    "source_id": "146280240",
+    "source_name": "OPC+Module+Uses+View.html"
+  },
+  {
+    "path": "architecture/views/modules/workflow-manager.html",
+    "title": "Workflow manager",
+    "group": "Views · Modules",
+    "description": "Collaborations and sequences for processing purchase orders.",
+    "source_id": "146280217",
+    "source_name": "Workflowmanager+Module+Uses+View.html"
+  },
+  {
+    "path": "architecture/views/modules/data-model.html",
+    "title": "Data model",
+    "group": "Views · Modules",
+    "description": "Entities, orders and the travel package catalog.",
+    "source_id": "146280285",
+    "source_name": "Adventure+Builder+Data+Model.html"
+  },
+  {
+    "path": "architecture/views/runtime/top-level-soa.html",
+    "title": "Top level SOA",
+    "group": "Views · Runtime",
+    "description": "Services, external systems and purchase order workflows.",
+    "source_id": "146280294",
+    "source_name": "Top+Level+SOA+View.html"
+  },
+  {
+    "path": "architecture/views/runtime/consumer-website.html",
+    "title": "Consumer website",
+    "group": "Views · Runtime",
+    "description": "Components and tiers of the customer-facing website.",
+    "source_id": "146280307",
+    "source_name": "Consumer+Website+Multi-tier+View.html"
+  },
+  {
+    "path": "architecture/views/runtime/opc.html",
+    "title": "OPC component & connector",
+    "group": "Views · Runtime",
+    "description": "Components, JMS queues and the purchase order life cycle.",
+    "source_id": "146280255",
+    "source_name": "OPC+C&C+View.html"
+  },
+  {
+    "path": "architecture/views/allocation/deployment.html",
+    "title": "Deployment",
+    "group": "Views · Allocation",
+    "description": "Nodes, execution environments and deployment.",
+    "source_id": "146280277",
+    "source_name": "Deployment+View.html"
+  },
+  {
+    "path": "architecture/views/allocation/installation.html",
+    "title": "Installation",
+    "group": "Views · Allocation",
+    "description": "Java EE artifacts and installation relationships.",
+    "source_id": "146280272",
+    "source_name": "Install+View.html"
+  },
+  {
+    "path": "architecture/interfaces/purchase-order.html",
+    "title": "OpcPurchaseOrderService",
+    "group": "Interfaces",
+    "description": "The service contract for submitting and canceling purchase orders.",
+    "source_id": "146280239",
+    "source_name": "OpcPurchaseOrderService+Interface+Documentation.html"
+  },
+  {
+    "path": "architecture/interfaces/order-tracking.html",
+    "title": "OpcOrderTrackingService",
+    "group": "Interfaces",
+    "description": "The service contract for retrieving purchase order details.",
+    "source_id": "146280247",
+    "source_name": "OpcOrderTrackingService+Interface+Documentation.html"
+  },
+  {
+    "path": "architecture/crosscutting/view-mapping.html",
+    "title": "Mapping between views",
+    "group": "Mappings & requirements",
+    "description": "Mappings between data, modules, components and deployment.",
+    "source_id": "146280425",
+    "source_name": "MappingBetweenViews.html"
+  },
+  {
+    "path": "architecture/crosscutting/requirements.html",
+    "title": "Requirements mapping",
+    "group": "Mappings & requirements",
+    "description": "The requirements matrix, left incomplete in the source document.",
+    "source_id": "146280363",
+    "source_name": "Mapping+Requirements+to+Architecture.html"
+  },
+  {
+    "path": "architecture/reference/glossary.html",
+    "title": "Glossary & acronyms",
+    "group": "References",
+    "description": "Domain terminology and technical acronyms.",
+    "source_id": "146280342",
+    "source_name": "Adventure+Builder+Glossary+and+Acronyms.html"
+  },
+  {
+    "path": "architecture/reference/bibliography.html",
+    "title": "Bibliography",
+    "group": "References",
+    "description": "Sources and supporting reading relevant to Adventure Builder.",
+    "source_id": "146280075",
+    "source_name": "Reference+Documentation.html"
+  },
+  {
+    "path": "architecture/reference/document-notes.html",
+    "title": "Document notes & attribution",
+    "group": "References",
+    "description": "Authors, educational purpose and limitations of the example.",
+    "source_id": "146280356",
+    "source_name": "Disclaimers.html"
+  },
+  {
+    "path": "templates/architecture-view.html",
+    "title": "Architecture view template",
+    "group": "Templates",
+    "description": "A reusable structure for documenting an architecture view.",
+    "source_id": "169412650",
+    "source_name": "Template:ArchitectureViewTemplate.html"
+  },
+  {
+    "path": "templates/interface.html",
+    "title": "Interface template",
+    "group": "Templates",
+    "description": "A reusable structure for documenting an interface contract.",
+    "source_id": "169412654",
+    "source_name": "Template:InterfaceTemplate.html"
+  },
+  {
+    "path": "index.html",
+    "title": "Adventure Builder",
+    "group": "Start here",
+    "description": "Software architecture documentation and reusable templates."
+  },
+  {
+    "path": "architecture/reading-guide.html",
+    "title": "Documentation guide",
+    "group": "Introduction",
+    "description": "Reading paths and the structure of architecture views."
+  },
+  {
+    "path": "architecture/documentation-status.html",
+    "title": "Documentation status",
+    "group": "References",
+    "description": "Gaps and open decisions already present in the source material."
+  }
+]

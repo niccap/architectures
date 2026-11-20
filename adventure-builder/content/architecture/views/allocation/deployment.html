@@ -1,0 +1,247 @@
+<h2 id="DeploymentView-primaryPrimaryPresentation">
+ <span id="DeploymentView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <p>
+       Informal Notation
+      </p>
+     </th>
+    </tr>
+   </thead>
+  </table>
+ </div>
+</div>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/deploymentview-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: deploymentview pp" decoding="async" loading="lazy" src="../../../assets/diagrams/deploymentview-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/deploymentview.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <p>
+       UML
+      </p>
+     </th>
+    </tr>
+   </thead>
+  </table>
+ </div>
+</div>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/deploymentview-pp2.png" title="Open the full-size diagram">
+    <img alt="Diagram: deploymentview pp2" decoding="async" loading="lazy" src="../../../assets/diagrams/deploymentview-pp2.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<h2 id="DeploymentView-elementElementCatalog">
+ <span id="DeploymentView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="DeploymentView-endusermachines">
+ end user machines
+</h3>
+<p>
+ This node is used to represent a user who can access the Adventure Builder application using a PC. It is most likely that he is using a web browser to place or track a purchaseorder.
+</p>
+<h3 id="DeploymentView-bankservermachine">
+ bank server machine
+</h3>
+<p>
+ This node is external to the system. It represents the server hosted by a bank that provides services to verify a user's account.
+</p>
+<h3 id="DeploymentView-airlineproviderservermachine">
+ airline provider server machine
+</h3>
+<p>
+ This node is external to the system. It represents the server hosted by an airlines supplier that provides services to place a transportation purchase order.
+</p>
+<h3 id="DeploymentView-lodgingproviderservermachine">
+ lodging provider server machine
+</h3>
+<p>
+ This node is external to the system. It represents the server hosted by a lodging supplier that provides services to place a lodging purchase order.
+</p>
+<h3 id="DeploymentView-activityproviderservermachine">
+ activity provider server machine
+</h3>
+<p>
+ This node is external to the system. It represents the server hosted by an activities supplier that provides services to place an activities purchase order.
+</p>
+<h3 id="DeploymentView-firewall">
+ firewall
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-AdventureBuilderlocalnetwork">
+ Adventure Builder local network
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-svr-web1">
+ svr-web1
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-svr-web2">
+ svr-web2
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-web1a,web1b,web2a,web2b">
+ web1a, web1b, web2a, web2b
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-svr-opc">
+ svr-opc
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-OpcGF">
+ OpcGF
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-svr-db1">
+ svr-db1
+</h3>
+<p>
+ TODO.
+</p>
+<h3 id="DeploymentView-svr-db1,svr-db2">
+ svr-db1, svr-db2
+</h3>
+<p>
+ TODO.
+</p>
+<h3 id="DeploymentView-AdventureCatalogDB">
+ Adventure Catalog DB
+</h3>
+<p>
+ This is a relational database that stores the adventure builder catalog containing various adventure packages. It also stores information about users for user authentication and authorization. The database server is MySQL Cluster 7.0 configured to use the InnoDB engine.
+</p>
+<h3 id="DeploymentView-svr-dbopc">
+ svr-dbopc
+</h3>
+<p>
+ TODO.
+</p>
+<h3 id="DeploymentView-AdventureOPCDB">
+ Adventure OPC DB
+</h3>
+<p>
+ This relational database stores purchase orders, invoices coming from the external suppliers and related information. The database server is MySQL configured to use the InnoDB engine.
+</p>
+<h3 id="DeploymentView-serviceregistry">
+ service registry
+</h3>
+<p>
+ Data repository that works as a basic registry of the external services used by OPC. More specifically, it has name, location and metadata about all the SOAP web services offered by the banks, airline, lodging, and activity external partners. TBD: use a relational database or XML based files.
+</p>
+<h3 id="DeploymentView-adminusermachine">
+ admin user machine
+</h3>
+<p class="todo">
+ TODO
+</p>
+<h3 id="DeploymentView-srv-mailer">
+ srv-mailer
+</h3>
+<p class="todo">
+ TODO
+</p>
+<p>
+ TODO: REMOVE...
+</p>
+<h3 id="DeploymentView-website.ear">
+ website.ear
+</h3>
+<p>
+ This is an enterprise archive artifact that is deployed on an application server. It contains the consumer website application.
+</p>
+<h3 id="DeploymentView-opc.ear">
+ opc.ear
+</h3>
+<p>
+ This is an enterprise archive artifact that is deployed on an application server. It contains the opc application.
+</p>
+<h2 id="DeploymentView-contextContextDiagram">
+ <span id="DeploymentView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ <em>
+  TODO: Add here a context diagram that graphically shows the scope of the part of the system represented by this view. A context diagram typically shows the part of the system as a single, distinguished box in the middle surrounded by other boxes that are the external entities. Lines show the relations between the part of the system and the external entities.
+ </em>
+</p>
+<h2 id="DeploymentView-variabilityVariabilityGuide">
+ <span id="DeploymentView-variability">
+ </span>
+ Variability Guide
+</h2>
+<p>
+ <em>
+  TODO: Describe here any variability mechanisms used in the portion of the system shown in this view, along with how and when (build time, deploy time, run time) those mechanisms may be exercised. Examples of variability include: optional components (e.g., plug-ins, add-ons); configurable replication of components and connectors; selection among different implementations of an element or different vendors; parameterized values set in build flags, .properties files, .ini files, or other config files.
+ </em>
+</p>
+<h2 id="DeploymentView-rationaleRationale">
+ <span id="DeploymentView-rationale">
+ </span>
+ Rationale
+</h2>
+<h3 id="DeploymentView-Scalability">
+ Scalability
+</h3>
+<p>
+ All the components that are SOAP web service providers in the Adventure Builder System are implemented using stateless session beans. This type of EJB component can be replicated across machines in a cluster and each machine can also make available a pool of such EJBs. This feature allows scaling of the number of requests it can handle. Horizontal scalability is achievable by adding more machines to the cluster. Vertical scalability is also an option by increasing the capacity of any machine (and then increasing the number of EJB instances in each EJB pool).
+ <small>
+  See EJB configuration discussion in
+  <a href="../runtime/opc.html#OPCC&amp;CView-variabilityVariabilityGuide" title="wikilink">
+   OPC C&amp;C View#Variability Guide
+  </a>
+  .
+ </small>
+</p>
+<p>
+ Nevertheless, the transactions performed by these stateless session beans ultimately require access to the database. The database cannot be easily replicated and may become a performance bottleneck if the number of calls increases beyond expectation.
+</p>
+<h2 id="DeploymentView-relatedRelatedViews">
+ <span id="DeploymentView-related">
+ </span>
+ Related Views
+</h2>
+<p>
+ N/A
+</p>

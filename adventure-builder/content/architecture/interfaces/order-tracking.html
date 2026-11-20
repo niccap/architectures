@@ -1,0 +1,168 @@
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-interfaceInterfaceidentity">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-interface">
+ </span>
+ Interface identity
+</h2>
+<p>
+ This is a SOAP web service interface named
+ <strong>
+  OpcOrderTrackingService
+ </strong>
+ . The main purpose of this web service is to track the status of a purchase order with a given order id.
+</p>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-resourcesResources">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-resources">
+ </span>
+ Resources
+</h2>
+<pre><code>OrderDetails getOrderDetails(String orderId) </code></pre>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-Pre-conditions">
+ Pre-conditions
+</h3>
+<ul>
+ <li>
+  The orderID argument must not be null.
+ </li>
+ <li>
+  The orderID must be a valid order id.
+ </li>
+</ul>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-Post-conditions">
+ Post-conditions
+</h3>
+<ul>
+ <li>
+  Return the details of the purchase order, which include the status of each of the airline requests (both departing and returning flights), hotel booking request and activity requests.
+ </li>
+</ul>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-Usagerestrictions">
+ Usage restrictions
+</h3>
+<ul>
+ <li>
+  <strong>
+   Authorization.
+  </strong>
+  Only a signed in user is authorized to call this operation. A customer user can only get information about orders he created. A sales representative user can get information about any order.
+ </li>
+ <li>
+  <strong>
+   Concurrent access.
+  </strong>
+  There isn't any limitation on the number of concurrent accesses of this interface. The service is implemented by using EJBs and concurrent calls to it are managed by the EJB container.
+ </li>
+</ul>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-dataDatatypesandconstants">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-data">
+ </span>
+ Data types and constants
+</h2>
+<ul>
+ <li>
+  <strong>
+   Type OrderDetails
+  </strong>
+  . This data structure contains the retrieved PurchaseOrder along with its status. Attributes:
+ </li>
+</ul>
+<pre><code>PurchaseOrder PO
+String status</code></pre>
+<p>
+ The PurchaseOrder type is described in the
+ <a href="purchase-order.html#OpcPurchaseOrderServiceInterfaceDocumentation-dataDatatypesandconstants" title="wikilink">
+  OpcPurchaseOrderService interface documentation
+ </a>
+ .
+</p>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-errorErrorhandling">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-error">
+ </span>
+ Error handling
+</h2>
+<p>
+ The exceptions raised by this interface are:
+</p>
+<ul>
+ <li>
+  <strong>
+   OrderNotFoundException
+  </strong>
+  . The service throws this exception if no purchase order with the given order id was found, or the orderId was null or ill-formed.
+ </li>
+ <li>
+  <strong>
+   RemoteException
+  </strong>
+  . The caller receives a RemoteException when there is a communication problem with the service provider implementing this interface.
+ </li>
+</ul>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-variabilityVariability">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-variability">
+ </span>
+ Variability
+</h2>
+<p>
+ N/A.
+</p>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-qualityQualityattributecharacteristics">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-quality">
+ </span>
+ Quality attribute characteristics
+</h2>
+<ul>
+ <li>
+  <strong>
+   Scalability
+  </strong>
+  : see discussion in
+  <a href="../views/allocation/deployment.html#DeploymentView-rationale" title="wikilink">
+   Deployment View - Rationale
+  </a>
+  .
+ </li>
+ <li>
+  <strong>
+   Performance
+  </strong>
+  : the operation shall return the results in less than 1 second.
+ </li>
+</ul>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-rationaleRationaleanddesignissues">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-rationale">
+ </span>
+ Rationale and design issues
+</h2>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-Java-to-WSDLapproachfordesignofinterface">
+ Java-to-WSDL approach for design of interface
+</h3>
+<p>
+ Since both the consumer website and the order processing center reside in the same enterprise we prefer the ease of development provided by JavaToWsdl compiler over stability of a manually-maintained WSDL description. However, this may result in rewriting the clients of this service every time we make a change to this interface.
+</p>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-UsingJAX-RPCforpassingparameters">
+ Using JAX-RPC for passing parameters
+</h3>
+<p>
+ Since the consumer website and the order processing center reside in the same enterprise, we avoid using complex XML processing and pass parameters as Java objects. It makes the interface slightly less interoperable but simplifies implementation.
+</p>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-PublishingthewebserviceasaWSDL">
+ Publishing the web service as a WSDL
+</h3>
+<p>
+ This web service is published as a WSDL in a well known location (static web service instead of using a registry) since it is not available for general public use. It is only used by the consumer website. The option to use SOAP instead of Java RMI or direct EJB calls is motivated by the possibility of replacing the Consumer website implementation with a different technology (e.g., .NET); SOAP can provide the required interoperability in that case.
+</p>
+<h3 id="OpcOrderTrackingServiceInterfaceDocumentation-UsingtheEJBendpointtype">
+ Using the EJB endpoint type
+</h3>
+<p>
+ We chose the EJB endpoint type because the order processing center is implemented using a set of session beans.
+</p>
+<h2 id="OpcOrderTrackingServiceInterfaceDocumentation-usageUsageguide">
+ <span id="OpcOrderTrackingServiceInterfaceDocumentation-usage">
+ </span>
+ Usage guide
+</h2>
+<pre><code>Context ic = new InitialContext();
+OpcOrderTrackingService opcOrderTrackingSvc =
+     (OpcOrderTrackingService) ic.lookup("java:comp/env/service/OpcOrderTrackingService");
+OrderTrackingIntf port = (OrderTrackingIntf) opcOrderTrackingSvc.getOrderTrackingIntfPort();
+OrderDetails orderDetails = port.getOrderDetails(orderId);</code></pre>

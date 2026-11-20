@@ -1,0 +1,680 @@
+<h2 id="TopLevelModuleUsesView-primaryPrimaryPresentation">
+ <span id="TopLevelModuleUsesView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/highlevelmoduleusesview-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: highlevelmoduleusesview pp" decoding="async" loading="lazy" src="../../../assets/diagrams/highlevelmoduleusesview-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/highlevelmoduleusesview.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<h2 id="TopLevelModuleUsesView-elementElementCatalog">
+ <span id="TopLevelModuleUsesView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="TopLevelModuleUsesView-ConsumerWebsite">
+ Consumer Website
+</h3>
+<p>
+ The web-based user interface of the Adventure Builder is implemented in this module. The user interface lets the user browse the catalog of travel packages, place a new purchase order, and track the status of existing orders. This module creates the purchase orders based on user input and passes them to OpcApp for processing. It uses an implementation of the
+ <a href="http://java.sun.com/blueprints/patterns/MVC-detailed.html">
+  Model View Controller pattern
+ </a>
+ called the Web Application Framework (waf). The model is implemented using Entity beans, the controller is implemented using servlets, and the view is a collection of JSPs and static HTML pages. Part of the client-facing code is implemented using the GWT framework.
+</p>
+<h3 id="TopLevelModuleUsesView-OpcApp">
+ OpcApp
+</h3>
+<p>
+ OpcApp stands for Order Processing Center Application. The business logic of the Adventure Builder is implemented in this module. It provides the following functionality:
+</p>
+<ul>
+ <li>
+  Accepting purchase order requests from the ConsumerWebsite for processing by hosting the
+  <a href="../../interfaces/purchase-order.html">
+   Purchase Order Web Service
+  </a>
+ </li>
+ <li>
+  Provide a mechanism for the Consumer Website to query the current status of a purchase order by hosting the
+  <a href="../../interfaces/order-tracking.html">
+   Order Tracking Web Service
+  </a>
+ </li>
+ <li>
+  Communicate with external suppliers to process and maintain the status of a purchase order.
+ </li>
+ <li>
+  Upon completion of processing a purchase order, send an email to the customer of its success or failure.
+ </li>
+</ul>
+<p>
+ A
+ <a href="opc-decomposition.html">
+  module decomposition refined view
+ </a>
+ and a
+ <a href="opc-uses.html">
+  module uses refined view
+ </a>
+ of OpcApp are available.
+</p>
+<h3 id="TopLevelModuleUsesView-utils">
+ utils
+</h3>
+<p>
+ This module contains utilities used by the Adventure Builder system.
+</p>
+<h3 id="TopLevelModuleUsesView-dao">
+ dao
+</h3>
+<p>
+ This module contains
+ <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/DataAccessObject.html">
+  Data Access Object (DAO)
+ </a>
+ utilities, such as a DAO factory. It does
+ <strong>
+  not
+ </strong>
+ contain the actual DAO classes that access the database--these classes are inside the ConsumerWebsite module.
+</p>
+<h3 id="TopLevelModuleUsesView-logger">
+ logger
+</h3>
+<p>
+ This module contains tracing and debugging utilities. The original name was tracer.
+</p>
+<h3 id="TopLevelModuleUsesView-servicelocator">
+ servicelocator
+</h3>
+<p>
+ This module is an implementation of the
+ <a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/ServiceLocator.html">
+  ServiceLocator
+ </a>
+ design pattern.
+</p>
+<h3 id="TopLevelModuleUsesView-gwt">
+ gwt
+</h3>
+<p>
+ <a href="https://en.wikipedia.org/wiki/Google_Web_Toolkit">
+  Google Web Toolkit (gwt)
+ </a>
+ is an open source framework for development of rich internet applications based on
+ <a href="http://en.wikipedia.org/wiki/Ajax_(programming)">
+  Ajax
+ </a>
+ .
+</p>
+<h3 id="TopLevelModuleUsesView-waf">
+ waf
+</h3>
+<p>
+ Waf stands for Web Application Framework. It is a
+ <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">
+  Model View Controller
+ </a>
+ framework similar to Struts. It allows you to specify in configuration files the web screens and action that are associated to user clicks on specific elements of the screen. The configuration file has the mapping of screens and actions to Java classes. The framework provides the engine to display the proper screens and invoke the proper actions.
+</p>
+<h3 id="TopLevelModuleUsesView-Bankcreditcardservice">
+ Bank credit card service
+</h3>
+<p>
+ This module represents an external service provided by a partner bank to validate credit card transactions.
+</p>
+<h3 id="TopLevelModuleUsesView-Airlinebookingservice">
+ Airline booking service
+</h3>
+<p>
+ This module represents an external service provided by an airline partner company to book air travel.
+</p>
+<h3 id="TopLevelModuleUsesView-Lodgingbookingservice">
+ Lodging booking service
+</h3>
+<p>
+ This module represents an external service provided by a lodging partner company to book hotel rooms.
+</p>
+<h3 id="TopLevelModuleUsesView-Activitybookingservice">
+ Activity booking service
+</h3>
+<p>
+ This module represents an external service provided by an activity supplier company to book different activities.
+</p>
+<h2 id="TopLevelModuleUsesView-contextContextDiagram">
+ <span id="TopLevelModuleUsesView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="TopLevelModuleUsesView-variabilityVariabilityGuide">
+ <span id="TopLevelModuleUsesView-variability">
+ </span>
+ Variability Guide
+</h2>
+<p>
+ See
+ <a href="opc-uses.html">
+  OPC Module Uses View - Variability Guide
+ </a>
+ .
+ <br/>
+ See
+ <a href="../runtime/top-level-soa.html#TopLevelSOAView-variabilityVariabilityGuide" title="wikilink">
+  Top Level SOA View - Variability Guide
+ </a>
+ .
+ <br/>
+ See
+ <a href="../runtime/consumer-website.html#ConsumerWebsiteMultitierView-variabilityVariabilityGuide" title="wikilink">
+  Consumer Website Multi-tier View - Variability Guide
+ </a>
+ .
+</p>
+<h2 id="TopLevelModuleUsesView-rationaleRationale">
+ <span id="TopLevelModuleUsesView-rationale">
+ </span>
+ Rationale
+</h2>
+<h3 id="TopLevelModuleUsesView-WAF">
+ WAF
+</h3>
+<p>
+ The WAF framework was chosen because it facilitates the implementation of the Consumer Website code by providing template classes for using the MVC pattern. For a given user operation, the developer implements an action class (controller) and JSP pages that correspond to the user screens (view). The developer also uses configuration files to provide a configurable mapping between actions, action classes, events and screens. The WAF infrastructure can then automatically take http requests and invoke the action classes and JSP screens. WAF also provides support for event-based communication and internationalization.
+</p>
+<p>
+ WAF also provides support for event-based communication and internationalization.
+</p>
+<p>
+ An alternative to WAF was to use the
+ <a href="https://spring.io/">
+  Spring framework
+ </a>
+ . Spring was a more robust and rich solution from a technical standpoint, but it was rejected because the development team is not familiar with Spring and very familiar with WAF.
+</p>
+<h3 id="TopLevelModuleUsesView-GWT">
+ GWT
+</h3>
+<p>
+ The GWT framework was chosen for the following reasons:
+</p>
+<ul>
+ <li>
+  It is open source, which allows us to go under the hood and fix things when needed.
+ </li>
+ <li>
+  It provides a rich development environment with powerful trace/debug, IDE integration and build management.
+ </li>
+ <li>
+  It integrates well with any other frontend technologies since it does not use proprietary standards.
+ </li>
+ <li>
+  It offers powerful widget construction features.
+ </li>
+ <li>
+  There are several extension libraries of widget components available.
+ </li>
+ <li>
+  Code is written in Java (and translated to JavaScript during build), which is an OO language that is familiar to the majority of the team.
+ </li>
+ <li>
+  Code is compiled into Javascript, which is available on a very high percentage of browsers.
+ </li>
+ <li>
+  It has a reasonably large support community and is backed by a major player in the industry (Google).
+ </li>
+</ul>
+<p>
+ The table below shows the comparative analysis of GWT and competing technologies based on the specific needs of our project.
+</p>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <br/>
+     </th>
+     <th>
+      <p>
+       Flex
+      </p>
+     </th>
+     <th>
+      <p>
+       GWT
+      </p>
+     </th>
+     <th>
+      <p>
+       OpenLaszlo
+      </p>
+     </th>
+     <th>
+      <p>
+       Silverlight
+      </p>
+     </th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>
+      <p>
+       Development language
+      </p>
+     </td>
+     <td>
+      <p>
+       ActionScript + MXML (Based on ECMAScript 4)
+      </p>
+     </td>
+     <td>
+      <p>
+       Java + JavaScript
+      </p>
+     </td>
+     <td>
+      <p>
+       LZX / JavaScript
+      </p>
+     </td>
+     <td>
+      <p>
+       Any .net language + XAML
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Development Environment
+      </p>
+     </td>
+     <td>
+      <p>
+       Eclipse Flex Builder
+      </p>
+     </td>
+     <td>
+      <p>
+       Eclipse
+      </p>
+     </td>
+     <td>
+      <p>
+       (?)
+      </p>
+     </td>
+     <td>
+      <p>
+       Visual Studio
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Code-build-run turnaround*
+      </p>
+     </td>
+     <td>
+      <p>
+       Good (~3s for simple application)
+      </p>
+     </td>
+     <td>
+      <p>
+       Good (~4s for simple application)
+      </p>
+     </td>
+     <td>
+      <p>
+       Very slow (30s+ for recompiling a 'hello world' page)
+      </p>
+     </td>
+     <td>
+      <p>
+       (?)
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Development efficiency
+      </p>
+     </td>
+     <td>
+      <p>
+       Good (declarative UI elements, data binding, visual designer)
+      </p>
+     </td>
+     <td>
+      <p>
+       Average (verbose procedural instantiation)
+      </p>
+     </td>
+     <td>
+      <p>
+       Good (declarative, data binding)
+      </p>
+     </td>
+     <td>
+      <p>
+       Good (same as Flex; Silverlight Blend compares to Flash MX)
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Debugging tools
+      </p>
+     </td>
+     <td>
+      <p>
+       Eclipse debugger
+      </p>
+     </td>
+     <td>
+      <p>
+       Eclipse debugger
+      </p>
+     </td>
+     <td>
+      <p>
+       Integrated debugger (couldn't get it to work)
+      </p>
+     </td>
+     <td>
+      <p>
+       Visual Studio Debugger
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Automated testing frameworks
+      </p>
+     </td>
+     <td>
+      <p>
+       Flex automation testing API
+      </p>
+     </td>
+     <td>
+      <p>
+       JUnit / Selenium
+      </p>
+     </td>
+     <td>
+      <p>
+       (?)
+      </p>
+     </td>
+     <td>
+      <p>
+       NUnit
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Graphics / Animation
+      </p>
+     </td>
+     <td>
+      <p>
+       Powerful flash animation engine
+      </p>
+     </td>
+     <td>
+      <p>
+       Average, can be extended with scriptaculous, ext-js
+      </p>
+     </td>
+     <td>
+      <p>
+       Depends on rendering runtime (Flash/DHTML)
+      </p>
+     </td>
+     <td>
+      <p>
+       See Flex
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Widget library
+      </p>
+     </td>
+     <td>
+      <p>
+       Very rich (due to maturity of technology)
+      </p>
+     </td>
+     <td>
+      <p>
+       Very rich (Javascript extension libraries)
+      </p>
+     </td>
+     <td>
+      <p>
+       Average (immature)
+      </p>
+     </td>
+     <td>
+      <p>
+       Same as flash (3rd party libraries)
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Developer Community
+      </p>
+     </td>
+     <td>
+      <p>
+       Well established
+      </p>
+     </td>
+     <td>
+      <p>
+       Well established
+      </p>
+     </td>
+     <td>
+      <p>
+       (?)
+      </p>
+     </td>
+     <td>
+      <p>
+       Less than Flex but growing
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Client execution performance*
+      </p>
+     </td>
+     <td>
+      <p>
+       Very good (native code)
+      </p>
+     </td>
+     <td>
+      <p>
+       Average (interpreted, except on Chrome)
+      </p>
+     </td>
+     <td>
+      <p>
+       Slightly slower than Flex (intermediate Laszlo layer)
+      </p>
+     </td>
+     <td>
+      <p>
+       Very good (native code)
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Communication with server
+      </p>
+     </td>
+     <td>
+      <p>
+       AMF, REST, SOAP
+      </p>
+     </td>
+     <td>
+      <p>
+       GWT-RPC, REST, SOAP, JSON
+      </p>
+     </td>
+     <td>
+      <p>
+       (?)
+      </p>
+     </td>
+     <td>
+      <p>
+       (?)
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Internationalization support
+      </p>
+     </td>
+     <td>
+      <p>
+       Average. Flex Runtime localization for latin charactersets. No native support for right to left languages.
+      </p>
+     </td>
+     <td>
+      <p>
+       GWT localization API provides out of the box solution.
+      </p>
+     </td>
+     <td>
+      <p>
+       Below average. Only accented European languages so far.
+      </p>
+     </td>
+     <td>
+      <p>
+       Poor, same as flex + lack of embeddable fonts.
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Portability
+      </p>
+     </td>
+     <td>
+      <p>
+       Requires Flash player
+      </p>
+     </td>
+     <td>
+      <p>
+       Requires Javascript, no plugin needed on major browsers
+      </p>
+     </td>
+     <td>
+      <p>
+       Runtime agnostic, currently supports Flash and DHTML (future projects for Java ME, iPhone, Silverlight?)
+      </p>
+     </td>
+     <td>
+      <p>
+       Requires Silverlight plugin (not currently fully supported on Linux)
+      </p>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <p>
+       Mobile support
+      </p>
+     </td>
+     <td>
+      <p>
+       Large number of platforms (all Windows mobile, most Symbian, 50+ cell phones)
+      </p>
+     </td>
+     <td>
+      <p>
+       Very limited
+      </p>
+     </td>
+     <td>
+      <p>
+       Depends on runtime (Flex or GWT)
+      </p>
+     </td>
+     <td>
+      <p>
+       Supported for 1.0, Windows mobile and Nokia S60
+      </p>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>
+<p>
+ <em>
+  *
+ </em>
+ All performance tests were executed on the same hardware: Pentium M 1.7GHz, 2GB RAM, Win XP Pro SP2
+</p>
+<h2 id="TopLevelModuleUsesView-relatedRelatedViews">
+ <span id="TopLevelModuleUsesView-related">
+ </span>
+ Related Views
+</h2>
+<ul>
+ <li>
+  Refinement of OpcApp showing decomposition:
+  <a href="opc-decomposition.html" title="wikilink">
+   OPC Module Decomposition View
+  </a>
+ </li>
+ <li>
+  Refinement of OpcApp showing use dependencies:
+  <a href="opc-uses.html" title="wikilink">
+   OPC Module Uses View
+  </a>
+ </li>
+</ul>

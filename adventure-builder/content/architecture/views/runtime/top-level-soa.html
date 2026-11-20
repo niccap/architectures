@@ -1,0 +1,296 @@
+<h2 id="TopLevelSOAView-primaryPrimaryPresentation">
+ <span id="TopLevelSOAView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <p>
+       Informal Notation
+      </p>
+     </th>
+    </tr>
+   </thead>
+  </table>
+ </div>
+</div>
+<p>
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/toplevelc-cview-pp.png" title="Open the full-size diagram">
+   <img alt="Diagram: toplevelc cview pp" decoding="async" loading="lazy" src="../../../assets/diagrams/toplevelc-cview-pp.png"/>
+  </a>
+ </span>
+</p>
+<p>
+ Visio file not available in the original download.
+</p>
+<div>
+ <div aria-label="Scrollable table" class="table-scroll" role="region" tabindex="0">
+  <table>
+   <thead>
+    <tr>
+     <th>
+      <p>
+       UML
+      </p>
+     </th>
+    </tr>
+   </thead>
+  </table>
+ </div>
+</div>
+<p>
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/toplevelc-cview-pp2.png" title="Open the full-size diagram">
+   <img alt="Diagram: toplevelc cview pp2" decoding="async" loading="lazy" src="../../../assets/diagrams/toplevelc-cview-pp2.png"/>
+  </a>
+ </span>
+</p>
+<h2 id="TopLevelSOAView-elementElementCatalog">
+ <span id="TopLevelSOAView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="TopLevelSOAView-Webbrowser">
+ Web browser
+</h3>
+<p>
+ This component represents the user interface of the application running on a web browser. Consumer Website is a Web 2.0 application implemented using GWT. Therefore, in addition to HTML, the web browser runs JavaScript code that uses Ajax to communicate with the server. Using the web browser, a customer of Adventure Builder opens the web site, browses through the existing catalog of adventure packages, places orders, and tracks the status of existing orders.
+</p>
+<h3 id="TopLevelSOAView-ConsumerWebsite">
+ Consumer Website
+</h3>
+<p>
+ The ConsumerWebsite is a multi-tier application implemented using Java EE technology. It's the client facing part of the Adventure Builder system. It is implemented using GWT code, a number of JSP and html pages, and standard components of the WAF framework. Its primary responsibility is to process the http requests coming from customers browsing the catalog or placing/tracking orders. Requests to place or track orders are relayed to the OPC application via SOAP web services.
+</p>
+<p>
+ See the
+ <a href="consumer-website.html">
+  Consumer Website Multi-tier View
+ </a>
+ for a description of the internal components of Consumer Website.
+</p>
+<h3 id="TopLevelSOAView-OPC">
+ OPC
+</h3>
+<p>
+ OPC is the order processing center application. It's a Java EE application that communicates with external components using SOAP web services.Internally, it consists of loosely coupled EJBs that communicate with each other using primarily asynchronous messaging. The internal architecture follows the message channel design pattern [Hohpe 2003]. See the
+ <a href="opc.html">
+  OPC C&amp;C View
+ </a>
+ for a description of the internal components of OPC. The core functionality of the Adventure Builder is implemented in this module. Its major functions are:
+</p>
+<ul>
+ <li>
+  Accept purchase order requests from the ConsumerWebsite for processing.
+ </li>
+ <li>
+  Fill a purchase order by communicating with external suppliers.
+ </li>
+ <li>
+  Provide a mechanism for the Consumer Website to query the current status of a purchase order.
+ </li>
+ <li>
+  Upon completion of processing a purchase order, send an email to the customer reporting its success or failure.
+ </li>
+</ul>
+<p>
+ OPC provides the following interfaces, which are exposed as SOAP web services:
+</p>
+<ul>
+ <li>
+  <a href="../../interfaces/purchase-order.html">
+   OpcPurchaseOrderService
+  </a>
+  - used to create a purchase order.
+ </li>
+ <li>
+  <a href="../../interfaces/order-tracking.html">
+   OpcOrderTrackingService
+  </a>
+  - used to track the status of a purchase order.
+ </li>
+ <li>
+  <a href="../../documentation-status.html#web-service-broker">
+   WebServiceBroker
+  </a>
+  - used by external suppliers to submit invoices back to OPC.
+ </li>
+</ul>
+<p>
+ OPC requires the following interfaces, which are provided by external partners as SOAP web services:
+</p>
+<ul>
+ <li>
+  CreditCardService - used to validate the credit card transaction with a bank.
+ </li>
+ <li>
+  AirlinePOService - used to send purchase orders to external airline suppliers.
+ </li>
+ <li>
+  LodgingPOService - used to send purchase orders to external lodging suppliers.
+ </li>
+ <li>
+  ActivityPOService - used to send purchase orders to external activity suppliers.
+ </li>
+</ul>
+<p>
+ The UML activity diagram below shows the processing of a purchase order. It uses a split-and-join pattern when filling an order. For simplicity, the diagram does not show interaction with a database. Following is the equivalent diagram using the BPMN notation.
+</p>
+<p>
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/toplevelc-cview-poactivitydiagram.png" title="Open the full-size diagram">
+   <img alt="Diagram: toplevelc cview poactivitydiagram" decoding="async" loading="lazy" src="../../../assets/diagrams/toplevelc-cview-poactivitydiagram.png"/>
+  </a>
+ </span>
+</p>
+<h2 id="TopLevelSOAView-">
+ <span>
+  <a class="diagram-link" href="../../../assets/diagrams/toplevelc-cview-po-bpmn.png" title="Open the full-size diagram">
+   <img alt="Diagram: toplevelc cview po bpmn" decoding="async" loading="lazy" src="../../../assets/diagrams/toplevelc-cview-po-bpmn.png"/>
+  </a>
+ </span>
+</h2>
+<h3 id="TopLevelSOAView-AdventureCatalogDB">
+ Adventure Catalog DB
+</h3>
+<p>
+ This is a relational database that stores the adventure builder catalog containing various adventure packages. It also stores information about users for user authentication and authorization. The database server is MySQL Cluster 7.0 configured to use the InnoDB engine.
+</p>
+<h3 id="TopLevelSOAView-AdventureOPCDB">
+ Adventure OPC DB
+</h3>
+<p>
+ This relational database stores purchase orders, invoices coming from the external suppliers and related information. The database server is MySQL configured to use the InnoDB engine.
+</p>
+<h3 id="TopLevelSOAView-serviceregistry">
+ service registry
+</h3>
+<p>
+ Data repository that works as a basic registry of the external services used by OPC. More specifically, it has name, location and metadata about all the SOAP web services offered by the banks, airline, lodging, and activity external partners. TBD: use a relational database or XML based files.
+</p>
+<h3 id="TopLevelSOAView-Bank">
+ Bank
+</h3>
+<p>
+ This component represents an external application hosted by a bank or credit card administrator. The application provides a SOAP web service to verify customers' credit card information.
+</p>
+<h3 id="TopLevelSOAView-AirlineProvider">
+ Airline Provider
+</h3>
+<p>
+ This component represents an external application hosted by an airline partner company. The application provides a SOAP web service to book air travel.
+</p>
+<h3 id="TopLevelSOAView-LodgingProvider">
+ Lodging Provider
+</h3>
+<p>
+ This component represents an external application hosted by a lodging partner company. The application provides a SOAP web service to book hotel rooms.
+</p>
+<h3 id="TopLevelSOAView-ActivityProvider">
+ Activity Provider
+</h3>
+<p>
+ This component represents an external application hosted by an activity provider partner company. The application provides a SOAP web service to book adventure activities, such as hot air ballooning, surf classes, and mountain climbing expeditions.
+</p>
+<h3 id="TopLevelSOAView-User'semailclient">
+ User's email client
+</h3>
+<p>
+ This is the email inbox of the end user (vacationer) who placed an adventure travel purchase request. OPC sends email notifications to the user via SMTP to inform of the status of the orders.
+</p>
+<h2 id="TopLevelSOAView-contextContextDiagram">
+ <span id="TopLevelSOAView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="TopLevelSOAView-variabilityVariabilityGuide">
+ <span id="TopLevelSOAView-variability">
+ </span>
+ Variability Guide
+</h2>
+<h3 id="TopLevelSOAView-Configurabilityofdataaccess">
+ Configurability of data access
+</h3>
+<p>
+ To configure data storage such that it supports different database vendors, we don't want to use any SQL statements in our queries that use vendor specific syntax and can potentially hinder migrating databases. We also use the DAO pattern to abstract away clients from accessing data directly.
+</p>
+<h3 id="TopLevelSOAView-Emailcommunication">
+ Email communication
+</h3>
+<p>
+ All email communication parameters (hostname, ports and protocol) should be configurable outside the code via a configuration file. The parameters are read at load time.
+</p>
+<h2 id="TopLevelSOAView-rationaleRationale">
+ <span id="TopLevelSOAView-rationale">
+ </span>
+ Rationale
+</h2>
+<ul>
+ <li>
+  We have chosen a Service Oriented Architecture for the Adventure Builder because we desire a high degree of interoperability between internal and external entities in the system. This gives us a great deal of flexibility in terms of implementation platforms.
+  <ul>
+   <li>
+    For example, the Airline Provider component may be implemented using Java, PHP, .NET, IBM CICS or any other technology that supports SOAP web services.
+   </li>
+   <li>
+    Internally, it's possible, for example, to reimplement and deploy Consumer Website using .NET. OPC doesn't have to change because the SOAP Web services communication allows such level of interoperability.
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul>
+ <li>
+  We have also a clear separation between the user interface and the business logic. The Consumer Website (user interface) and OPC (business logic) are two separate applications that together implement the functionality described in the
+  <a href="../../system-overview.html#SystemOverview-Functionality" title="wikilink">
+   System Overview
+  </a>
+  .
+ </li>
+</ul>
+<ul>
+ <li>
+  We chose to implement the service registry using a simple data repository because of ease of implementation. Creating a UDDI registry was an alternative that was rejected because it would bring increased complexity with no apparent benefit, given that the repository is only queried internally (using a standard format is more relevant when the registry will be accessed by external players).
+ </li>
+</ul>
+<h2 id="TopLevelSOAView-relatedRelatedViews">
+ <span id="TopLevelSOAView-related">
+ </span>
+ Related Views
+</h2>
+<ul>
+ <li>
+  Refinement of Consumer Website:
+  <a href="consumer-website.html" title="wikilink">
+   Consumer Website Multi-tier View
+  </a>
+ </li>
+ <li>
+  Refinement of OPC:
+  <a href="opc.html" title="wikilink">
+   OPC C&amp;C View
+  </a>
+ </li>
+ <li>
+  Interface documentation:
+  <ul>
+   <li>
+    <a href="../../interfaces/purchase-order.html" title="wikilink">
+     OpcPurchaseOrderService Interface Documentation
+    </a>
+   </li>
+   <li>
+    <a href="../../interfaces/order-tracking.html" title="wikilink">
+     OpcOrderTrackingService Interface Documentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>

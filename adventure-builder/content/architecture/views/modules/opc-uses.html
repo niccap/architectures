@@ -1,0 +1,324 @@
+<h2 id="OPCModuleUsesView-primaryPrimaryPresentation">
+ <span id="OPCModuleUsesView-primary">
+ </span>
+ Primary Presentation
+</h2>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/opcmoduleusesview-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: opcmoduleusesview pp" decoding="async" loading="lazy" src="../../../assets/diagrams/opcmoduleusesview-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/opcmoduleusesview.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<h2 id="OPCModuleUsesView-elementElementCatalog">
+ <span id="OPCModuleUsesView-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="OPCModuleUsesView-OpcApp">
+ OpcApp
+</h3>
+<p>
+ OpcApp stands for Order Processing Center Application. The business logic of the Adventure Builder is implemented in this module. It provides the following functionality:
+</p>
+<ul>
+ <li>
+  Accepting purchase order requests from the ConsumerWebsite for processing by hosting the
+  <a href="../../interfaces/purchase-order.html">
+   Purchase Order Web Service
+  </a>
+ </li>
+ <li>
+  Provide a mechanism for the Consumer Website to query the current status of a purchase order by hosting the
+  <a href="../../interfaces/order-tracking.html">
+   Order Tracking Web Service
+  </a>
+ </li>
+ <li>
+  Communicate with external suppliers to process and maintain the status of a purchase order.
+ </li>
+ <li>
+  Upon completion of processing a purchase order, send an email to the customer of its success or failure.
+ </li>
+</ul>
+<h3 id="OPCModuleUsesView-opc">
+ opc
+</h3>
+<p>
+ This package contains all the order processing logic, including the workflow, internal queues used for communication between elements, and interaction with external web services.
+</p>
+<h3 id="OPCModuleUsesView-crm.ejb">
+ crm.ejb
+</h3>
+<p>
+ This is the Customer Relationship Manager (CRM) module. The job of this module is to send out an email once an order has been completely and successfully processed. It is implemented as a message-driven bean.
+ <em>
+  In the future this module can hold additional information about customers that could assist in providing the customers with a better experience. This could include things like a history of a particular customer's purchases, or sending out periodic emails to customers regarding new and fresh deals.
+ </em>
+</p>
+<h3 id="OPCModuleUsesView-invoice">
+ invoice
+</h3>
+<p>
+ This package contains a data structure that holds information that the OPC uses to communicate with external suppliers. The data structure also holds the status of an order in the invoice (for more information on the lifecycle of an order see the state diagram in the
+ <a href="../runtime/opc.html">
+  OPC C&amp;C view
+ </a>
+ ).
+</p>
+<h3 id="OPCModuleUsesView-mailer">
+ mailer
+</h3>
+<p>
+ The mailer is a helper module and its primary responsibility is to send out emails using the Java Mail API.It is provided with a message and email addresses to send out emails.
+ <em>
+  In the future this module will be moved to the utils package outside opc.
+ </em>
+</p>
+<h3 id="OPCModuleUsesView-financial">
+ financial
+</h3>
+<p>
+ The financial module is responsible for verifying and charging the customer's credit card. For this purpose it calls the external web services provided by the bank. The verification of the credit card happens in asynchronous manner and the OPC application waits for the external web service to reply before moving on. If the response from the banking service is not positive, the OPC application does not further process the order.
+</p>
+<h3 id="OPCModuleUsesView-utils">
+ utils
+</h3>
+<p>
+ This package contains utility classes that are used by the OPC application, such as glue code for JMSAPI.
+ <em>
+  In the future, this module will be moved to the utils package outside opc.
+ </em>
+</p>
+<h3 id="OPCModuleUsesView-orderfiller">
+ orderfiller
+</h3>
+<p>
+ This module reads an internal queue of order requests. When an order arrives, it decomposes the order into requests to the different providers involved. These requests are sent in XML format to internal queues.
+</p>
+<h3 id="OPCModuleUsesView-powebservice">
+ powebservice
+</h3>
+<p>
+ This module provides a web service that is used by ConsumerWebsite to communicate the details of a purchase order to the OPC for processing. The web service interface is OpcPurchaseOrderService:
+</p>
+<ul>
+ <li>
+  <a href="../../interfaces/purchase-order.html">
+   OpcPurchaseOrderService interface documentation
+  </a>
+ </li>
+</ul>
+<h3 id="OPCModuleUsesView-otwebservice">
+ otwebservice
+</h3>
+<p>
+ This module provides a web service that is used by ConsumerWebsite to query the status of an order by providing the order id. The web service interface is OpcOrderTrackingService:
+</p>
+<ul>
+ <li>
+  <a href="../../interfaces/order-tracking.html">
+   OpcOrderTrackingService interface documentation
+  </a>
+ </li>
+</ul>
+<h3 id="OPCModuleUsesView-orderreceiver">
+ orderreceiver
+</h3>
+<p>
+ The orderreceiver helps in persisting the purchase order in a relational database.
+</p>
+<h3 id="OPCModuleUsesView-workflowmanager">
+ workflowmanager
+</h3>
+<p>
+ The workflowmanager coordinates the processing of a purchase order and tracks the status of the purchase order throughout its lifecycle. The workflow manager mediates the interaction among the other internal modules of the OPC in such a manner that they (other internal modules) are oblivious to each others existence.
+</p>
+<p>
+ For more details see the
+ <a href="workflow-manager.html">
+  workflowmanager Module Uses View
+ </a>
+</p>
+<h3 id="OPCModuleUsesView-purchaseorder">
+ purchaseorder
+</h3>
+<p>
+ This package contains the classes that correspond in memory to the data entities required to create a purchase order. For each data entity, there is a POJO and an entity bean. The POJOs are used throughout the application as data transfer objects. The data entities in this package are:
+</p>
+<ul>
+ <li>
+  Activity
+ </li>
+ <li>
+  CreditCard
+ </li>
+ <li>
+  Lodging
+ </li>
+ <li>
+  PurchaseOrder
+ </li>
+ <li>
+  Transportation
+ </li>
+ <li>
+  ContactInfo
+ </li>
+ <li>
+  Address
+ </li>
+</ul>
+<p>
+ See the
+ <a href="data-model.html">
+  data model
+ </a>
+ for a description of what each entity represents.
+</p>
+<h3 id="OPCModuleUsesView-webservicebroker">
+ webservicebroker
+</h3>
+<p>
+ The webservicebroker is responsible for the interaction via web services with the airline, lodging and activity providers. This module is divided into two sub-modules described below.
+</p>
+<h3 id="OPCModuleUsesView-requestor">
+ requestor
+</h3>
+<p>
+ Contains classes that can invoke the external web services provided by airline, lodging and activity supplier partners. It also contains a message-driven bean that can receive messages sent through an internal queue. These messages contain exactly the requests to be sent to the external web services.
+</p>
+<h3 id="OPCModuleUsesView-provider">
+ provider
+</h3>
+<p>
+ This module provides a web service that is visible to airline, lodging and activity supplier partners. This web service is implemented in a session bean and is used by the external partners to submit the result of processing requests made to them. Calls to this web service are forwarded to an internal queue.
+</p>
+<h3 id="OPCModuleUsesView-processmanager">
+ processmanager
+</h3>
+<p>
+ The processmanager is used by the otwebservice module to retrieve from the database adventure package purchase orders and their updated status. It is also used by the workflowmanager to retrieve the orders placed with the external providers and persist their status. This module contains the submodules (ejb and manager.ejb) described below.
+</p>
+<h3 id="OPCModuleUsesView-ejb">
+ ejb
+</h3>
+<p>
+ Contains a session bean that offers operations to retrieve orders and update the status of a given order(both the adventure purchase order and the orders placed with the partner suppliers).
+</p>
+<h3 id="OPCModuleUsesView-manager.ejb">
+ manager.ejb
+</h3>
+<p>
+ Contains an entity bean to persist a purchase order. The entity bean uses container-managed persistence (CMP).
+</p>
+<h2 id="OPCModuleUsesView-contextContextDiagram">
+ <span id="OPCModuleUsesView-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/opcmoduleusesview-cd.png" title="Open the full-size diagram">
+    <img alt="Diagram: opcmoduleusesview cd" decoding="async" loading="lazy" src="../../../assets/diagrams/opcmoduleusesview-cd.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<h2 id="OPCModuleUsesView-variabilityVariabilityGuide">
+ <span id="OPCModuleUsesView-variability">
+ </span>
+ Variability Guide
+</h2>
+<h3 id="OPCModuleUsesView-Addorremovebank">
+ Add or remove bank
+</h3>
+<p>
+ The system allows adding or removing partner banks by keeping a registry of the external services (element 'service registry' in the
+ <a href="../runtime/top-level-soa.html">
+  Top Level SOAView
+ </a>
+ ). A new bank has to implement the CreditCardService interface. At run time new banks are identified by OPC by querying the registry for external services that implement that interface.
+</p>
+<h3 id="OPCModuleUsesView-Addorremoveairline,lodgingoractivityprovider">
+ Add or remove airline, lodging or activity provider
+</h3>
+<p>
+ The system allows adding an partner provider by keeping a registry of the external services (element 'service registry' in the
+ <a href="../runtime/top-level-soa.html">
+  Top Level SOA View
+ </a>
+ ).
+</p>
+<ul>
+ <li>
+  A new airline has to implement the AirlinePOService interface. At run time new airlines are identified by OPC by querying the registry for external services that implement that interface.
+ </li>
+ <li>
+  A new lodging provider has to implement the LodgingPOService interface. At run time new lodging providers are identified by OPC by querying the registry for external services that implement that interface.
+ </li>
+ <li>
+  A new activity provider has to implement the ActivityPOService interface. At run time new activity providers are identified by OPC by querying the registry for external services that implement that interface.
+ </li>
+</ul>
+<p>
+ The webservicebroker module provides an abstraction layer within the OPC that contacts all external partner providers. Other modules of OPC are oblivious to changes in the set of available suppliers. Other modules only know the identity of the new supplier.
+</p>
+<h2 id="OPCModuleUsesView-rationaleRationale">
+ <span id="OPCModuleUsesView-rationale">
+ </span>
+ Rationale
+</h2>
+<p>
+ See
+ <a href="../runtime/opc.html#OPCC&amp;CView-rationale">
+  OPC C&amp;C View - Rationale
+ </a>
+</p>
+<h2 id="OPCModuleUsesView-relatedRelatedViews">
+ <span id="OPCModuleUsesView-related">
+ </span>
+ Related Views
+</h2>
+<ul>
+ <li>
+  Parent view:
+  <a href="top-level-uses.html" title="wikilink">
+   Top Level Module Uses View
+  </a>
+ </li>
+ <li>
+  Refinement of workflowmanager:
+  <a href="workflow-manager.html" title="wikilink">
+   Workflowmanager Module Uses View
+  </a>
+ </li>
+ <li>
+  <a href="opc-decomposition.html" title="wikilink">
+   OPC Module Decomposition View
+  </a>
+ </li>
+ <li>
+  Interface documentation:
+  <ul>
+   <li>
+    <a href="../../interfaces/purchase-order.html" title="wikilink">
+     OpcPurchaseOrderService Interface Documentation
+    </a>
+   </li>
+   <li>
+    <a href="../../interfaces/order-tracking.html" title="wikilink">
+     OpcOrderTrackingService Interface Documentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>

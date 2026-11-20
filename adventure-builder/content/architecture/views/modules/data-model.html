@@ -1,0 +1,121 @@
+<h2 id="AdventureBuilderDataModel-primaryPrimaryPresentation">
+ <span id="AdventureBuilderDataModel-primary">
+ </span>
+ Primary Presentation
+</h2>
+<p>
+ <span>
+  <span>
+   <a class="diagram-link" href="../../../assets/diagrams/datamodel-pp.png" title="Open the full-size diagram">
+    <img alt="Diagram: datamodel pp" decoding="async" loading="lazy" src="../../../assets/diagrams/datamodel-pp.png"/>
+   </a>
+  </span>
+ </span>
+</p>
+<p>
+ <a href="../../../assets/downloads/datamodel.vsd" title="wikilink">
+  Visio file
+ </a>
+</p>
+<h2 id="AdventureBuilderDataModel-elementElementCatalog">
+ <span id="AdventureBuilderDataModel-element">
+ </span>
+ Element Catalog
+</h2>
+<h3 id="AdventureBuilderDataModel-PurchaseOrder">
+ PurchaseOrder
+</h3>
+<h3 id="AdventureBuilderDataModel-OrderStatusHistory">
+ OrderStatusHistory
+</h3>
+<h3 id="AdventureBuilderDataModel-Document">
+ Document
+</h3>
+<h3 id="AdventureBuilderDataModel-UserAccount">
+ UserAccount
+</h3>
+<p>
+ An end user of the AdventureBuilder application. We store email id, password, and contact info.
+</p>
+<h3 id="AdventureBuilderDataModel-AirlineOrder">
+ AirlineOrder
+</h3>
+<h3 id="AdventureBuilderDataModel-Transportation">
+ Transportation
+</h3>
+<p>
+ Each transportation entry is a flight available for booking in our travel packages. For each one, we record: name, departure and arrival airports, days and times, airline name, flight number, rate, cabin class.
+</p>
+<h3 id="AdventureBuilderDataModel-LodgingOrder">
+ LodgingOrder
+</h3>
+<h3 id="AdventureBuilderDataModel-Lodging">
+ Lodging
+</h3>
+<p>
+ A hotel, guesthouse or B&amp;B that can be used for lodging in our travel packages. For each type of lodging, we store name, description, location info, room description, rates.
+</p>
+<h3 id="AdventureBuilderDataModel-Package">
+ Package
+</h3>
+<p>
+ A travel package available in our catalog. A package specifies lodging and a list of activities. Attributes of a package include name, description, rate per person, category and a representative image to show to the user.
+</p>
+<h3 id="AdventureBuilderDataModel-Category">
+ Category
+</h3>
+<p>
+ A category of adventure travel packages. Examples: island packages, mountain adventures. This categorization helps the user to browse through our catalog of packages. Category data consists of a name, description and a representative image to show on the user screen.
+</p>
+<h3 id="AdventureBuilderDataModel-Activity">
+ Activity
+</h3>
+<p>
+ An adventure activity available. Examples: snorkeling, fishing, bird watching, rafting, surfing. Activities are available in selected packages. Information stored for each activity include: name, description, rate, and a representative image to show to the user.
+</p>
+<h3 id="AdventureBuilderDataModel-ActivityInPackage">
+ ActivityInPackage
+</h3>
+<p>
+ This entity represents the many-to-many relationship between activity and package. It simply lists the activities in each package.
+</p>
+<h3 id="AdventureBuilderDataModel-ActivityPurchaseOrder">
+ ActivityPurchaseOrder
+</h3>
+<h2 id="AdventureBuilderDataModel-contextContextDiagram">
+ <span id="AdventureBuilderDataModel-context">
+ </span>
+ Context Diagram
+</h2>
+<p>
+ <em>
+  TODO: Add here a context diagram that graphically shows the scope of the part of the system represented by this view. A context diagram typically shows the part of the system as a single, distinguished box in the middle surrounded by other boxes that are the external entities. Lines show the relations between the part of the system and the external entities.
+ </em>
+</p>
+<h2 id="AdventureBuilderDataModel-variabilityVariabilityGuide">
+ <span id="AdventureBuilderDataModel-variability">
+ </span>
+ Variability Guide
+</h2>
+<p>
+ N/A
+</p>
+<h2 id="AdventureBuilderDataModel-rationaleRationale">
+ <span id="AdventureBuilderDataModel-rationale">
+ </span>
+ Rationale
+</h2>
+<p>
+ <em>
+  TODO: Describe here the rationale for any significant design decisions whose scope is limited to this view. Also describe any significant rejected alternatives. This section may also indicate assumptions, constraints, results of analysis and experiments, and architecturally significant requirements that affect the view.
+  <br/>
+ </em>
+</p>
+<h2 id="AdventureBuilderDataModel-relatedRelatedViews">
+ <span id="AdventureBuilderDataModel-related">
+ </span>
+ Related Views
+</h2>
+<p>
+ N/A
+</p>
