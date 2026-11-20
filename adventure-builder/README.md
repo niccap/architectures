@@ -69,6 +69,22 @@ Then open `http://127.0.0.1:8000`. To host the site on a static server, copy
 directory structure. No compilation, external services or routing rules are
 required.
 
+## GitHub Pages
+
+The repository workflow `.github/workflows/adventure-builder-pages.yml` rebuilds
+and validates this site, then publishes only `index.html`, `architecture/`,
+`templates/` and `assets/`. Source fragments, scripts and the repository's other
+projects are not included in the Pages artifact.
+
+In the repository's **Settings → Pages → Build and deployment**, set **Source**
+to **GitHub Actions**. Commit and push the workflow to `main`. Later pushes that
+change `adventure-builder/` or the workflow automatically publish a new version;
+you can also run **Publish Adventure Builder** manually from the **Actions** tab
+on `main`.
+
+The contents of this directory are published at the site's root:
+<https://niccap.github.io/architectures/>.
+
 ## Editorial approach
 
 All site content, navigation, introductory guides and project documentation are

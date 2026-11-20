@@ -63,3 +63,4 @@ Desktop.ini
 # Hidden files and directories (keep this ignore file)
 .*
 !.gitignore
+!.github/
